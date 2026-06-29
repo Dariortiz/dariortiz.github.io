@@ -327,6 +327,34 @@
     .ach-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--rose); margin-bottom: 0.35rem; }
     .ach-value { font-size: 0.875rem; color: var(--text); line-height: 1.5; }
 
+    /* ── HERO GRADIENT ANIMATION ── */
+    .hero {
+      background: linear-gradient(160deg, #EEF2FF 0%, #EDE9FE 30%, #DDD6FE 60%, #E8E4FF 100%);
+      background-size: 300% 300%;
+      animation: gradientShift 10s ease infinite;
+    }
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ── DARÍO SHIMMER ── */
+    .dario-name {
+      display: inline-block;
+      background: linear-gradient(90deg, #AB4155 20%, #e8919f 50%, #AB4155 80%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      -webkit-text-stroke: 0; /* override inline style via class */
+      animation: shimmerSweep 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.9s both;
+    }
+    @keyframes shimmerSweep {
+      0%   { background-position: 150% center; }
+      100% { background-position: -50% center; }
+    }
+
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(32px); }
@@ -407,7 +435,7 @@
   <div class="hero-inner">
     <div class="hero-text">
       <h1>
-        <span class="first">Luis <span style="font-size: 1.9em; color: #AB4155; font-family: 'Allura', cursive; -webkit-text-stroke: 0.7px #AB4155;">Darío</span></span><br>
+        <span class="first">Luis <span class="dario-name" style="font-size: 1.9em; font-family: 'Allura', cursive;">Darío</span></span><br>
         <span class="last" style="display: block; margin-top: -0.45em;">Ortiz Izquierdo</span>
       </h1>
       <p class="hero-title"
@@ -477,9 +505,9 @@
               data-es="Control plane Node/TypeScript (chain-writer viem, indexador on-chain, Prisma/PostgreSQL, WebSocket, cifrado X25519/AES-256-GCM); consola React/Vite con 17 vistas y visualizaciones D3">
             Node/TypeScript control plane (viem chain-writer, chain event indexer, Prisma/PostgreSQL, WebSocket, X25519/AES-256-GCM encryption); React/Vite console with 17 role-scoped views and D3 fraud-ring visualizations
           </li>
-          <li data-en="~1,860 tests at ~98% coverage; CI with coverage gates, gas snapshots, fuzz/invariant testing; 223-entry findings register; ~518 commits over 2 weeks"
-              data-es="~1.860 pruebas con ~98% de cobertura; CI con gates de cobertura, gas snapshots, pruebas fuzz/invariant; 223 hallazgos registrados; ~518 commits en 2 semanas">
-            ~1,860 tests at ~98% coverage; CI with coverage gates, gas snapshots, fuzz/invariant testing; 223-entry findings register; ~518 commits over 2 weeks
+          <li data-en="~1,860 tests at ~98% coverage; CI with coverage gates, gas snapshots, fuzz/invariant testing; 223-entry findings register"
+              data-es="~1.860 pruebas con ~98% de cobertura; CI con gates de cobertura, gas snapshots, pruebas fuzz/invariant; 223 hallazgos registrados">
+            ~1,860 tests at ~98% coverage; CI with coverage gates, gas snapshots, fuzz/invariant testing; 223-entry findings register
           </li>
         </ul>
         <div class="proj-tags">
@@ -534,6 +562,7 @@
           <span class="proj-tag">keccak256</span>
           <span class="proj-tag">Alchemy</span>
           <span class="proj-tag">Vercel</span>
+          <span class="proj-tag">Railway</span>
         </div>
       </div>
 
@@ -905,6 +934,19 @@
 
     all.forEach(function(el) { observer.observe(el); });
   })();
+
+  // Magnetic buttons
+  document.querySelectorAll('.hero-links .btn').forEach(function(btn) {
+    btn.addEventListener('mousemove', function(e) {
+      var r = btn.getBoundingClientRect();
+      var x = (e.clientX - r.left - r.width  / 2) * 0.25;
+      var y = (e.clientY - r.top  - r.height / 2) * 0.25;
+      btn.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+    });
+    btn.addEventListener('mouseleave', function() {
+      btn.style.transform = '';
+    });
+  });
 
   function setLang(lang) {
     document.querySelectorAll('[data-en]').forEach(function(el) {
