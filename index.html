@@ -3,26 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Luis Darío Ortiz Izquierdo — AI Engineer & Applied Mathematician based in Mexico City.">
+  <meta name="description" content="Luis Darío Ortiz Izquierdo, Applied Mathematician, Blockchain Engineer and Full-Stack Developer based in Mexico City.">
   <title>Luis Darío Ortiz Izquierdo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg:           #FFFFFF;
-      --bg-subtle:    #F9F6FE;
-      --purple:       #BE74F1;
-      --purple-mid:   #9333EA;
-      --purple-dark:  #6B21A8;
+      --bg-subtle:    #EEF2FF;
+      --purple:       #7C3AED;
+      --purple-mid:   #6D28D9;
+      --purple-dark:  #4C1D95;
+      --navy:         #1E3A8A;
       --rose:         #BE185D;
+      --rosa:         #E91E8C;
       --text:         #1A1A1A;
       --text-muted:   #6B7280;
-      --border:       #E9D8FD;
-      --border-light: #F3E8FF;
+      --border:       #C7D2FE;
+      --border-light: #E0E7FF;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       color: var(--text);
@@ -35,7 +38,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255,255,255,0.92);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
@@ -46,7 +49,6 @@
       height: 60px;
       gap: 1rem;
     }
-
     .nav-name {
       font-weight: 800;
       color: var(--purple-dark);
@@ -54,18 +56,8 @@
       letter-spacing: -0.01em;
       white-space: nowrap;
     }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.25rem;
-    }
-
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-links { display: flex; gap: 1.25rem; }
     .nav-links a {
       text-decoration: none;
       color: var(--text-muted);
@@ -74,7 +66,6 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--purple-mid); }
-
     .lang-toggle {
       display: flex;
       background: var(--bg-subtle);
@@ -83,7 +74,6 @@
       border: 1px solid var(--border);
       gap: 2px;
     }
-
     .lang-btn {
       padding: 3px 11px;
       border-radius: 18px;
@@ -99,53 +89,58 @@
     .lang-btn.active {
       background: var(--purple);
       color: #fff;
-      box-shadow: 0 1px 4px rgba(190,116,241,0.4);
+      box-shadow: 0 1px 4px rgba(124,58,237,0.4);
     }
 
     /* ── HERO ── */
     .hero {
-      background: linear-gradient(160deg, #FDFAFF 0%, #F3E8FF 60%, #FCE7F3 100%);
-      padding: 5.5rem 2rem 4.5rem;
-      text-align: center;
+      background: linear-gradient(160deg, #EEF2FF 0%, #EDE9FE 55%, #DDD6FE 100%);
+      padding: 5rem 2rem 4.5rem;
       border-bottom: 1px solid var(--border);
     }
-
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .hero-text { flex: 1; }
+    .hero-photo { flex-shrink: 0; }
+    .hero-avatar {
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 12%;
+      border: 4px solid rgba(255,255,255,0.95);
+      box-shadow: 0 0 0 3px var(--purple), 0 12px 32px rgba(76,29,149,0.22);
+      display: block;
+    }
     .hero h1 {
-      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      font-size: clamp(2.2rem, 5.5vw, 3.6rem);
       font-weight: 900;
       letter-spacing: -0.035em;
       line-height: 1.05;
-      margin-bottom: 1rem;
+      margin-bottom: 0.9rem;
     }
-    .hero h1 .first { color: var(--purple); }
-    .hero h1 .last  { color: var(--purple-dark); }
-
+    .hero h1 .first { color: #5F6CDA; }
+    .hero h1 .last  { color: var(--navy); }
     .hero-title {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      font-weight: 500;
+      font-size: 1.0rem;
+      color: var(--navy);
+      font-weight: 600;
       margin-bottom: 0.4rem;
+      letter-spacing: 0.01em;
     }
-
     .hero-location {
       font-size: 0.875rem;
       color: var(--text-muted);
-      margin-bottom: 2.25rem;
+      margin-bottom: 2rem;
     }
-    .hero-location a {
-      color: var(--purple-mid);
-      text-decoration: none;
-      font-weight: 500;
-    }
+    .hero-location a { color: var(--purple-mid); text-decoration: none; font-weight: 500; }
     .hero-location a:hover { text-decoration: underline; }
-
-    .hero-links {
-      display: flex;
-      justify-content: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
+    .hero-links { display: flex; justify-content: flex-start; gap: 0.75rem; flex-wrap: wrap; }
     .btn {
       padding: 0.6rem 1.5rem;
       border-radius: 8px;
@@ -157,32 +152,15 @@
       align-items: center;
       gap: 0.35rem;
     }
-    .btn-primary {
-      background: var(--purple-mid);
-      color: #fff;
-    }
+    .btn-primary { background: var(--purple-mid); color: #fff; }
     .btn-primary:hover { background: var(--purple-dark); transform: translateY(-1px); }
-    .btn-secondary {
-      background: #fff;
-      color: var(--purple-dark);
-      border: 1.5px solid var(--border);
-    }
+    .btn-secondary { background: #fff; color: var(--purple-dark); border: 1.5px solid var(--border); }
     .btn-secondary:hover { border-color: var(--purple); background: var(--bg-subtle); transform: translateY(-1px); }
 
     /* ── SECTION WRAPPER ── */
-    .section-wrap {
-      padding: 4.5rem 2rem;
-    }
-    .section-wrap.alt {
-      background: var(--bg-subtle);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .section-inner {
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
+    .section-wrap { padding: 4.5rem 2rem; }
+    .section-wrap.alt { background: var(--bg-subtle); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .section-inner { max-width: 900px; margin: 0 auto; }
     .section-label {
       font-size: 0.7rem;
       font-weight: 800;
@@ -191,7 +169,6 @@
       color: var(--rose);
       margin-bottom: 0.4rem;
     }
-
     h2 {
       font-size: 1.8rem;
       font-weight: 800;
@@ -202,18 +179,60 @@
     }
 
     /* ── PROFILE ── */
-    .profile-text {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: #374151;
+    .profile-text { font-size: 1.05rem; line-height: 1.8; color: #374151; }
+
+    /* ── PROJECTS GRID ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 1.5rem; }
+    .project-card {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      border-top: 4px solid var(--rosa);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .project-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+    .project-card h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+    .project-card .proj-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+    .proj-links { display: flex; gap: 0.5rem; flex-shrink: 0; }
+    .proj-link {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--purple-mid);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .proj-link:hover { background: var(--bg-subtle); border-color: var(--purple); }
+    .project-card ul { padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; }
+    .project-card ul li { font-size: 0.875rem; color: #374151; line-height: 1.55; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.25rem; }
+    .proj-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      color: var(--purple-dark);
+      padding: 0.15rem 0.6rem;
+      border-radius: 12px;
     }
 
     /* ── TIMELINE ── */
-    .timeline {
-      display: flex;
-      flex-direction: column;
-    }
-
+    .timeline { display: flex; flex-direction: column; }
     .timeline-item {
       display: grid;
       grid-template-columns: 150px 1fr;
@@ -222,12 +241,7 @@
       margin-bottom: 2.25rem;
       border-bottom: 1px solid var(--border-light);
     }
-    .timeline-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-      margin-bottom: 0;
-    }
-
+    .timeline-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
     .timeline-date {
       font-size: 0.78rem;
       font-weight: 700;
@@ -236,56 +250,32 @@
       text-align: right;
       line-height: 1.4;
     }
-
-    .tl-title {
-      font-size: 1rem;
+    .tl-title { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 0.2rem; line-height: 1.3; }
+    .tl-org { font-size: 0.85rem; color: var(--rose); font-weight: 600; margin-bottom: 0.1rem; }
+    .tl-loc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .tl-sub {
+      font-size: 0.78rem;
       font-weight: 700;
-      color: var(--text);
-      margin-bottom: 0.2rem;
-      line-height: 1.3;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--navy);
+      margin: 0.85rem 0 0.4rem;
+      opacity: 0.75;
     }
-    .tl-org {
-      font-size: 0.85rem;
-      color: var(--rose);
-      font-weight: 600;
-      margin-bottom: 0.1rem;
-    }
-    .tl-loc {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 0.75rem;
-    }
-    .tl-bullets {
-      padding-left: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-    .tl-bullets li {
-      font-size: 0.875rem;
-      color: #374151;
-      line-height: 1.55;
-    }
+    .tl-sub:first-of-type { margin-top: 0; }
+    .tl-bullets { padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 0.25rem; }
+    .tl-bullets li { font-size: 0.875rem; color: #374151; line-height: 1.55; }
 
-    /* ── EDUCATION CARD ── */
+    /* ── EDUCATION ── */
     .edu-card {
       background: #fff;
       border: 1.5px solid var(--border);
-      border-left: 5px solid var(--purple);
+      border-left: 5px solid var(--rosa);
       border-radius: 10px;
       padding: 1.75rem 2rem;
     }
-    .edu-card h3 {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: var(--purple-dark);
-      margin-bottom: 0.3rem;
-    }
-    .edu-meta {
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      margin-bottom: 0.4rem;
-    }
+    .edu-card h3 { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 0.3rem; }
+    .edu-meta { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 0.5rem; }
     .edu-gpa {
       display: inline-block;
       background: var(--bg-subtle);
@@ -295,102 +285,66 @@
       font-weight: 700;
       padding: 0.2rem 0.7rem;
       border-radius: 20px;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.85rem;
     }
-    .edu-thesis {
-      font-size: 0.875rem;
-      color: #374151;
-      line-height: 1.55;
-    }
+    .edu-thesis { font-size: 0.9rem; color: #374151; line-height: 1.65; }
     .edu-thesis em { color: var(--purple-mid); font-style: italic; }
+    .edu-thesis p + p { margin-top: 0.65rem; }
 
     /* ── SKILLS ── */
-    .skills-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
+    .skills-grid { display: flex; flex-direction: column; gap: 2rem; }
     .skill-group h3 {
       font-size: 0.72rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--purple-dark);
+      color: var(--navy);
       margin-bottom: 0.65rem;
       padding-bottom: 0.4rem;
       border-bottom: 1.5px solid var(--border-light);
     }
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-    }
-    .tag {
-      background: #fff;
-      border: 1px solid var(--border);
-      color: #374151;
-      padding: 0.3rem 0.85rem;
-      border-radius: 20px;
-      font-size: 0.78rem;
-      font-weight: 500;
-      line-height: 1;
-    }
-    .tag.hi {
-      background: var(--bg-subtle);
-      border-color: var(--purple);
-      color: var(--purple-dark);
-      font-weight: 600;
-    }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .tag { background: #fff; border: 1px solid var(--border); color: #374151; padding: 0.3rem 0.85rem; border-radius: 20px; font-size: 0.78rem; font-weight: 500; line-height: 1; }
+    .tag.hi { background: var(--bg-subtle); border-color: var(--purple); color: var(--purple-dark); font-weight: 600; }
 
-    /* ── ACHIEVEMENTS ── */
-    .ach-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1rem;
-    }
-    .ach-card {
-      background: #fff;
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      padding: 1.1rem 1.25rem;
-    }
-    .ach-label {
-      font-size: 0.68rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--rose);
-      margin-bottom: 0.35rem;
-    }
-    .ach-value {
+    /* ── CERTIFICATIONS ── */
+    .cert-list { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
+    .cert-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
       font-size: 0.875rem;
-      color: var(--text);
       line-height: 1.5;
     }
+    .cert-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--purple); flex-shrink: 0; margin-top: 0.45rem; }
+    .cert-item a { color: var(--purple-mid); font-weight: 600; text-decoration: none; }
+    .cert-item a:hover { text-decoration: underline; }
+    .cert-item span { color: var(--text-muted); }
+
+    /* ── ACHIEVEMENTS ── */
+    .ach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+    .ach-card { background: #fff; border: 1.5px solid var(--border); border-radius: 10px; padding: 1.1rem 1.25rem; }
+    .ach-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--rose); margin-bottom: 0.35rem; }
+    .ach-value { font-size: 0.875rem; color: var(--text); line-height: 1.5; }
 
     /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 2.25rem 2rem;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      border-top: 1px solid var(--border);
-    }
+    footer { text-align: center; padding: 2.25rem 2rem; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border); }
     footer a { color: var(--purple-mid); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
+    @media (max-width: 700px) {
       nav { padding: 0 1rem; }
       .nav-links { display: none; }
-      .timeline-item {
-        grid-template-columns: 1fr;
-        gap: 0.25rem;
-      }
+      .timeline-item { grid-template-columns: 1fr; gap: 0.25rem; }
       .timeline-date { text-align: left; }
       h2 { font-size: 1.5rem; }
       .hero { padding: 4rem 1.25rem 3.5rem; }
+      .hero-inner { flex-direction: column; text-align: center; gap: 2rem; }
+      .hero-links { justify-content: center; }
+      .hero-avatar { width: 150px; height: 150px; }
       .section-wrap { padding: 3.5rem 1.25rem; }
+      .projects-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -401,10 +355,13 @@
   <span class="nav-name">Luis Darío Ortiz Izquierdo</span>
   <div class="nav-right">
     <div class="nav-links">
-      <a href="#profile"     data-en="About"      data-es="Sobre mí">About</a>
-      <a href="#experience"  data-en="Experience"  data-es="Experiencia">Experience</a>
-      <a href="#education"   data-en="Education"   data-es="Educación">Education</a>
-      <a href="#skills"      data-en="Skills"      data-es="Habilidades">Skills</a>
+      <a href="#profile"    data-en="About"      data-es="Sobre mí">About</a>
+      <a href="#projects"   data-en="Projects"   data-es="Proyectos">Projects</a>
+      <a href="#experience" data-en="Experience" data-es="Experiencia">Experience</a>
+      <a href="#academic"   data-en="Academic"   data-es="Académico">Academic</a>
+      <a href="#education"  data-en="Education"  data-es="Educación">Education</a>
+      <a href="#skills"     data-en="Skills"     data-es="Habilidades">Skills</a>
+      <a href="#achievements" data-en="More"     data-es="Más">More</a>
     </div>
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
@@ -415,24 +372,32 @@
 
 <!-- ══ HERO ══ -->
 <div class="hero">
-  <h1>
-    <span class="first">Luis Darío</span><br>
-    <span class="last">Ortiz Izquierdo</span>
-  </h1>
-  <p class="hero-title"
-     data-en="AI Engineer · Applied Mathematician"
-     data-es="Ingeniero de IA · Matemático Aplicado">
-    AI Engineer · Applied Mathematician
-  </p>
-  <p class="hero-location">
-    📍 Mexico City &nbsp;·&nbsp;
-    <a href="mailto:dariortiz215@gmail.com">dariortiz215@gmail.com</a>
-    &nbsp;·&nbsp; +52 55 1954 4511
-  </p>
-  <div class="hero-links">
-    <a href="https://github.com/dariortiz" target="_blank" rel="noopener" class="btn btn-primary">GitHub</a>
-    <a href="mailto:dariortiz215@gmail.com" class="btn btn-secondary"
-       data-en="Contact me" data-es="Contáctame">Contact me</a>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>
+        <span class="first">Luis <span style="font-size: 1.9em; color: #AB4155; font-family: 'Allura', cursive; -webkit-text-stroke: 0.7px #AB4155;">Darío</span></span><br>
+        <span class="last" style="display: block; margin-top: -0.45em;">Ortiz Izquierdo</span>
+      </h1>
+      <p class="hero-title"
+         data-en="Applied Mathematician · Blockchain Engineer · Full-Stack Developer"
+         data-es="Matemático Aplicado · Ingeniero Blockchain · Desarrollador Full-Stack">
+        Applied Mathematician · Blockchain Engineer · Full-Stack Developer
+      </p>
+      <p class="hero-location">
+        Mexico City &nbsp;·&nbsp;
+        <a href="mailto:dariortiz@protonmail.com">dariortiz@protonmail.com</a>
+        &nbsp;·&nbsp; +52 55 1954 4511
+      </p>
+      <div class="hero-links">
+        <a href="https://github.com/dariortiz" target="_blank" rel="noopener" class="btn btn-primary">GitHub</a>
+        <a href="https://linkedin.com/in/dariortizq" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn</a>
+        <a href="mailto:dariortiz@protonmail.com" class="btn btn-secondary"
+           data-en="Contact me" data-es="Contáctame">Contact me</a>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="headshot.jpg" alt="Luis Darío Ortiz Izquierdo" class="hero-avatar">
+    </div>
   </div>
 </div>
 
@@ -442,15 +407,103 @@
     <div class="section-label" data-en="WHO I AM" data-es="QUIÉN SOY">WHO I AM</div>
     <h2 data-en="Professional Profile" data-es="Perfil Profesional">Professional Profile</h2>
     <p class="profile-text"
-       data-en="AI Engineer at PwC's CT&amp;I division with a strong foundation in full-stack development and applied mathematics. I build AI-powered products end-to-end — from backend architecture and LLM integration to frontend delivery — and bring quantitative depth to problems that benefit from rigorous modeling. My academic background in stochastic processes and probabilistic systems gives me an analytical edge in designing, evaluating, and improving AI-driven features. I thrive at the intersection of solid engineering practice and intelligent systems, motivated by building tools that create measurable impact for enterprise clients."
-       data-es="Ingeniero de IA en la división CT&amp;I de PwC, con sólida base en desarrollo full-stack y matemáticas aplicadas. Construyo productos con IA de extremo a extremo — desde arquitectura backend e integración de LLMs hasta entrega frontend — y aporto profundidad cuantitativa a problemas que se benefician de modelado riguroso. Mi formación en procesos estocásticos y sistemas probabilísticos me da ventaja analítica al diseñar, evaluar y mejorar funcionalidades basadas en IA. Me desempeño en la intersección entre ingeniería sólida y sistemas inteligentes, motivado por construir herramientas con impacto medible para clientes enterprise.">
-      AI Engineer at PwC's CT&amp;I division with a strong foundation in full-stack development and applied mathematics. I build AI-powered products end-to-end — from backend architecture and LLM integration to frontend delivery — and bring quantitative depth to problems that benefit from rigorous modeling. My academic background in stochastic processes and probabilistic systems gives me an analytical edge in designing, evaluating, and improving AI-driven features. I thrive at the intersection of solid engineering practice and intelligent systems, motivated by building tools that create measurable impact for enterprise clients.
+       data-en="My degree is in applied mathematics, and my thesis is the first formal study to produce closed-form probabilistic results for blockchain consensus dynamics, covering fork formation, chain reorganization, and adversarial attack scenarios under both PoW and PoS using Phase Type distributions, in a domain where no such framework previously existed. That background changes how I reason about protocol security and system design: I bring first-principles mathematical thinking to problems most practitioners treat as empirical or intuitive. Blockchain protocols are what I find most technically interesting, and I build in this space by choice outside of work; Concord and Obsignata are both deployed to production. At PwC's CT&amp;I I work across full-stack development, data engineering, and LLM-powered products."
+       data-es="Mi título es en matemáticas aplicadas, y mi tesis es el primer estudio formal en producir resultados probabilísticos cerrados para la dinámica del consenso blockchain, cubriendo la formación de forks, reorganizaciones de cadena y escenarios de ataque adversarial bajo PoW y PoS con distribuciones Phase Type, en un dominio donde no existía tal framework. Esa base cambia cómo razono sobre seguridad de protocolos y diseño de sistemas: aporto pensamiento matemático de primeros principios a problemas que la mayoría de los profesionales tratan de manera empírica o intuitiva. Los protocolos blockchain son lo que encuentro más interesante técnicamente, y construyo en este espacio por elección fuera del trabajo; Concord y Obsignata están ambos desplegados a producción. En CT&amp;I de PwC trabajo en desarrollo full-stack, ingeniería de datos y productos con LLMs.">
+      My degree is in applied mathematics, and my thesis is the first formal study to produce closed-form probabilistic results for blockchain consensus dynamics, covering fork formation, chain reorganization, and adversarial attack scenarios under both PoW and PoS using Phase Type distributions, in a domain where no such framework previously existed. That background changes how I reason about protocol security and system design: I bring first-principles mathematical thinking to problems most practitioners treat as empirical or intuitive. Blockchain protocols are what I find most technically interesting, and I build in this space by choice outside of work; Concord and Obsignata are both deployed to production. At PwC's CT&amp;I I work across full-stack development, data engineering, and LLM-powered products.
     </p>
   </div>
 </div>
 
+<!-- ══ PROJECTS ══ -->
+<div class="section-wrap alt" id="projects">
+  <div class="section-inner">
+    <div class="section-label" data-en="WHAT I'VE BUILT" data-es="LO QUE HE CONSTRUIDO">WHAT I'VE BUILT</div>
+    <h2 data-en="Projects" data-es="Proyectos">Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-card-header">
+          <div>
+            <h3>Concord</h3>
+            <div class="proj-meta" data-en="PwC Hackathon · 2026 · Tech Lead (3-person team)" data-es="Hackathon PwC · 2026 · Tech Lead (equipo de 3)">PwC Hackathon · 2026 · Tech Lead (3-person team)</div>
+          </div>
+        </div>
+        <ul>
+          <li data-en="End-to-end blockchain insurance settlement platform on a 4-node Hyperledger Besu QBFT consortium: 14 Solidity contracts (~2,100 LOC) covering claim orchestration, multilateral settlement netting, catastrophe relief pools, multisig carrier approval, credential registries, and dispute management"
+              data-es="Plataforma blockchain de liquidación de seguros end-to-end en un consorcio Hyperledger Besu QBFT de 4 nodos: 14 contratos Solidity (~2.100 LOC) para orquestación de reclamos, netting multilateral, pools de catástrofes, aprobación multisig, registros de credenciales y gestión de disputas">
+            End-to-end blockchain insurance settlement platform on a 4-node Hyperledger Besu QBFT consortium: 14 Solidity contracts (~2,100 LOC) covering claim orchestration, multilateral settlement netting, catastrophe relief pools, multisig carrier approval, credential registries, and dispute management
+          </li>
+          <li data-en="Node/TypeScript control plane (~40 REST endpoints + WebSocket live events) integrated via viem; chain event indexer projecting on-chain state into a Prisma/PostgreSQL read model; off-chain workers for settlement netting and fraud-ring graph computation; X25519/AES-256-GCM envelope encryption for party-scoped sensitive data"
+              data-es="Control plane Node/TypeScript (~40 endpoints REST + eventos WebSocket en vivo) integrado via viem; indexador de eventos on-chain proyectado en modelo de lectura Prisma/PostgreSQL; workers off-chain para netting de liquidación y cómputo de grafos de fraude; cifrado X25519/AES-256-GCM por parte">
+            Node/TypeScript control plane (~40 REST endpoints + WebSocket live events) integrated via viem; chain event indexer projecting on-chain state into a Prisma/PostgreSQL read model; off-chain workers for settlement netting and fraud-ring graph computation; X25519/AES-256-GCM envelope encryption for party-scoped sensitive data
+          </li>
+          <li data-en="React/Vite console with 17 role-scoped views, live WebSocket data, and D3 force-directed fraud-ring visualizations; RBAC across 5 roles; Merkle-proof distributions for scalable catastrophe payouts"
+              data-es="Consola React/Vite con 17 vistas por rol, datos WebSocket en vivo y visualizaciones D3 de grafos de fraude; RBAC en 5 roles; distribuciones con prueba Merkle para pagos escalables de catástrofes">
+            React/Vite console with 17 role-scoped views, live WebSocket data, and D3 force-directed fraud-ring visualizations; RBAC across 5 roles; Merkle-proof distributions for scalable catastrophe payouts
+          </li>
+          <li data-en="~1,860 automated tests at ~98% line coverage; GitHub Actions CI; Hardhat toolchain with gas-regression snapshot ceilings and fuzz/invariant testing"
+              data-es="~1.860 pruebas automatizadas con ~98% de cobertura; CI con GitHub Actions; toolchain Hardhat con límites de gas-regression y pruebas fuzz/invariant">
+            ~1,860 automated tests at ~98% line coverage; GitHub Actions CI; Hardhat toolchain with gas-regression snapshot ceilings and fuzz/invariant testing
+          </li>
+        </ul>
+        <div class="proj-tags">
+          <span class="proj-tag">Solidity</span>
+          <span class="proj-tag">Hyperledger Besu</span>
+          <span class="proj-tag">TypeScript</span>
+          <span class="proj-tag">viem</span>
+          <span class="proj-tag">React</span>
+          <span class="proj-tag">Hardhat</span>
+          <span class="proj-tag">D3.js</span>
+          <span class="proj-tag">PostgreSQL</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-header">
+          <div>
+            <h3>Obsignata</h3>
+            <div class="proj-meta" data-en="Personal solo project · 2026 · Deployed to production" data-es="Proyecto personal en solitario · 2026 · Desplegado a producción">Personal solo project · 2026 · Deployed to production</div>
+          </div>
+          <div class="proj-links">
+            <a href="https://obsignata-mkhj.vercel.app/" target="_blank" rel="noopener" class="proj-link" data-en="Live app" data-es="App en vivo">Live app</a>
+            <a href="https://github.com/Dariortiz/Obsignata" target="_blank" rel="noopener" class="proj-link">GitHub</a>
+          </div>
+        </div>
+        <ul>
+          <li data-en="Full-stack document timestamping service deployed to production on Polygon, producing tamper-proof on-chain certificates"
+              data-es="Servicio de timestamping de documentos full-stack desplegado a producción en Polygon, produciendo certificados on-chain a prueba de manipulación">
+            Full-stack document timestamping service deployed to production on Polygon, producing tamper-proof on-chain certificates
+          </li>
+          <li data-en="Custom keccak256 Merkle batching pipeline that commits thousands of document hashes in a single on-chain transaction, minimizing gas costs"
+              data-es="Pipeline de batching Merkle keccak256 que confirma miles de hashes de documentos en una sola transacción on-chain, minimizando costos de gas">
+            Custom keccak256 Merkle batching pipeline that commits thousands of document hashes in a single on-chain transaction, minimizing gas costs
+          </li>
+          <li data-en="Client-side verification via ethers.js, with no server in the verification loop; deployed on Polygon Amoy via Alchemy; verification also possible directly on Polygonscan"
+              data-es="Verificación del lado del cliente via ethers.js, sin servidor en el loop de verificación; desplegado en Polygon Amoy via Alchemy; verificación también posible directamente en Polygonscan">
+            Client-side verification via ethers.js, with no server in the verification loop; deployed on Polygon Amoy via Alchemy; verification also possible directly on Polygonscan
+          </li>
+          <li data-en="Privacy-first design: documents never leave the browser; only hashes are transmitted and stored on-chain"
+              data-es="Diseño privacy-first: los documentos nunca salen del navegador; solo los hashes son transmitidos y almacenados on-chain">
+            Privacy-first design: documents never leave the browser; only hashes are transmitted and stored on-chain
+          </li>
+        </ul>
+        <div class="proj-tags">
+          <span class="proj-tag">Solidity</span>
+          <span class="proj-tag">Polygon</span>
+          <span class="proj-tag">ethers.js</span>
+          <span class="proj-tag">Merkle Trees</span>
+          <span class="proj-tag">keccak256</span>
+          <span class="proj-tag">Alchemy</span>
+          <span class="proj-tag">Vercel</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- ══ EXPERIENCE ══ -->
-<div class="section-wrap alt" id="experience">
+<div class="section-wrap" id="experience">
   <div class="section-inner">
     <div class="section-label" data-en="WHERE I'VE WORKED" data-es="DÓNDE HE TRABAJADO">WHERE I'VE WORKED</div>
     <h2 data-en="Experience" data-es="Experiencia">Experience</h2>
@@ -459,33 +512,43 @@
       <div class="timeline-item">
         <div class="timeline-date">Sep 2025 – Present</div>
         <div>
-          <div class="tl-title" data-en="AI Engineer, Associate" data-es="Ingeniero de IA, Associate">AI Engineer, Associate</div>
-          <div class="tl-org">PwC — CT&amp;I, Future Ready Program</div>
-          <div class="tl-loc"
-               data-en="Mexico City · Full-time since Mar 2026"
-               data-es="Ciudad de México · Tiempo completo desde Mar 2026">
-            Mexico City · Full-time since Mar 2026
-          </div>
+          <div class="tl-title" data-en="AI Engineer / Backend Developer, Associate" data-es="Ingeniero de IA / Desarrollador Backend, Associate">AI Engineer / Backend Developer, Associate</div>
+          <div class="tl-org">PwC · CT&amp;I, Future Ready Program</div>
+          <div class="tl-loc" data-en="Mexico City · Full-time since Mar 2026" data-es="Ciudad de México · Tiempo completo desde Mar 2026">Mexico City · Full-time since Mar 2026</div>
+
+          <div class="tl-sub" data-en="Customer Link: Data, Analytics &amp; DataOps" data-es="Customer Link: Datos, Analítica y DataOps">Customer Link: Data, Analytics &amp; DataOps</div>
           <ul class="tl-bullets">
-            <li data-en="Helped develop and maintain <em>Listen</em>, a full-stack product (Angular, React, Node.js, C#) with integrated LLM capabilities"
-                data-es="Desarrollo y mantenimiento de <em>Listen</em>, producto full-stack (Angular, React, Node.js, C#) con capacidades LLM integradas">
-              Helped develop and maintain <em>Listen</em>, a full-stack product (Angular, React, Node.js, C#) with integrated LLM capabilities
+            <li data-en="Traced the bottleneck in a slow PySpark pipeline and refactored it to run 4× faster (Python, Databricks, ADLS); joined DataOps to own and continue improving the main pipeline (Snowflake, Azure DevOps)"
+                data-es="Identifiqué el cuello de botella en un pipeline PySpark lento y lo refactoricé para que corriera 4× más rápido (Python, Databricks, ADLS); me uní al equipo de DataOps para ser dueño del pipeline principal (Snowflake, Azure DevOps)">
+              Traced the bottleneck in a slow PySpark pipeline and refactored it to run 4× faster (Python, Databricks, ADLS); joined DataOps to own and continue improving the main pipeline (Snowflake, Azure DevOps)
             </li>
-            <li data-en="Delivered improvements to UI stability, UX consistency, and backend performance in a multi-tenant environment, directly impacting reliability for enterprise clients"
-                data-es="Mejoras en estabilidad UI, consistencia UX y rendimiento backend en entorno multi-tenant, impactando la confiabilidad para clientes enterprise">
-              Delivered improvements to UI stability, UX consistency, and backend performance in a multi-tenant environment, directly impacting reliability for enterprise clients
+            <li data-en="Built and deployed an internal data health dashboard from scratch (FastAPI, React/TypeScript, Vite) and replaced an Excel-based staffing tracker with a proper frontend"
+                data-es="Construí y desplegué un dashboard de salud de datos interno desde cero (FastAPI, React/TypeScript, Vite) y reemplacé un tracker de staffing en Excel con un frontend adecuado">
+              Built and deployed an internal data health dashboard from scratch (FastAPI, React/TypeScript, Vite) and replaced an Excel-based staffing tracker with a proper frontend
             </li>
-            <li data-en="Proactively led technical onboarding for the intern cohort, resolving hardware and software blockers that accelerated the team's ramp-up by over a week"
-                data-es="Lideré proactivamente el onboarding técnico de la cohorte de internos, resolviendo bloqueos que aceleraron el arranque del equipo en más de una semana">
-              Proactively led technical onboarding for the intern cohort, resolving hardware and software blockers that accelerated the team's ramp-up by over a week
+            <li data-en="Set up synthetic customer personas for a retail client (end-to-end, from segmentation variables to data loading) and ran a sponsorship impact analysis measuring how sponsorships moved product sales for a professional sports client"
+                data-es="Configuré personas sintéticas de clientes para un cliente retail (de extremo a extremo, desde variables de segmentación hasta carga de datos) y realicé un análisis de impacto de patrocinios para un cliente deportivo profesional">
+              Set up synthetic customer personas for a retail client and ran a sponsorship impact analysis measuring how sponsorships moved product sales for a professional sports client
             </li>
-            <li data-en="Collaborated in an Agile team via sprint planning, code reviews, and PRs, ensuring code quality and timely delivery"
-                data-es="Colaboré en equipo Agile mediante sprint planning, code reviews y PRs, asegurando calidad y entrega oportuna">
-              Collaborated in an Agile team via sprint planning, code reviews, and PRs, ensuring code quality and timely delivery
+          </ul>
+
+          <div class="tl-sub" data-en="Listen: LLM-Powered Enterprise Application" data-es="Listen: Aplicación Enterprise con LLMs">Listen: LLM-Powered Enterprise Application</div>
+          <ul class="tl-bullets">
+            <li data-en="Developed and maintained Listen, a full-stack multi-tenant application (Angular, React, Node.js, C#) with integrated LLM capabilities for enterprise workforce insights and survey summarization"
+                data-es="Desarrollé y mantuve Listen, una aplicación multi-tenant full-stack (Angular, React, Node.js, C#) con capacidades LLM para insights de workforce y resumen de encuestas enterprise">
+              Developed and maintained <em>Listen</em>, a full-stack multi-tenant application (Angular, React, Node.js, C#) with integrated LLM capabilities for enterprise workforce insights and survey summarization
             </li>
-            <li data-en="Supported integration of LLM-powered features for employee survey summarization and workforce insights dashboards"
-                data-es="Apoyé la integración de funcionalidades LLM para resumen de encuestas de empleados y dashboards de workforce insights">
-              Supported integration of LLM-powered features for employee survey summarization and workforce insights dashboards
+            <li data-en="Diagnosed and resolved backend performance and UI stability issues, directly improving reliability for enterprise clients"
+                data-es="Diagnostiqué y resolví problemas de rendimiento backend y estabilidad UI, mejorando directamente la confiabilidad para clientes enterprise">
+              Diagnosed and resolved backend performance and UI stability issues, directly improving reliability for enterprise clients
+            </li>
+            <li data-en="Led intern onboarding, resolving hardware and software environment blockers that got the team unblocked more than a week ahead of schedule"
+                data-es="Lideré el onboarding de internos, resolviendo bloqueos de hardware y software que desbloquearon al equipo más de una semana antes de lo esperado">
+              Led intern onboarding, resolving hardware and software environment blockers that got the team unblocked more than a week ahead of schedule
+            </li>
+            <li data-en="Collaborated through sprint planning, code reviews, and PRs in an Agile team"
+                data-es="Colaboré mediante sprint planning, code reviews y PRs en un equipo Agile">
+              Collaborated through sprint planning, code reviews, and PRs in an Agile team
             </li>
           </ul>
         </div>
@@ -496,35 +559,22 @@
 </div>
 
 <!-- ══ ACADEMIC EXPERIENCE ══ -->
-<div class="section-wrap" id="academic">
+<div class="section-wrap alt" id="academic">
   <div class="section-inner">
-    <div class="section-label" data-en="RESEARCH &amp; PROJECTS" data-es="INVESTIGACIÓN Y PROYECTOS">RESEARCH &amp; PROJECTS</div>
+    <div class="section-label" data-en="RESEARCH &amp; ACADEMIA" data-es="INVESTIGACIÓN Y ACADEMIA">RESEARCH &amp; ACADEMIA</div>
     <h2 data-en="Academic Experience" data-es="Experiencia Académica">Academic Experience</h2>
     <div class="timeline">
 
       <div class="timeline-item">
         <div class="timeline-date">2025</div>
         <div>
-          <div class="tl-title"
-               data-en="Social Service: Cryptography in Hardware &amp; Software"
-               data-es="Servicio Social: Criptografía en Hardware y Software">
-            Social Service: Cryptography in Hardware &amp; Software
-          </div>
-          <div class="tl-org" data-en="Institute of Applied Sciences and Technology, UNAM" data-es="Instituto de Ciencias Aplicadas y Tecnología, UNAM">Institute of Applied Sciences and Technology, UNAM</div>
+          <div class="tl-title" data-en="Social Service: Cryptography in Hardware &amp; Software" data-es="Servicio Social: Criptografía en Hardware y Software">Social Service: Cryptography in Hardware &amp; Software</div>
+          <div class="tl-org" data-en="Institute of Applied Sciences and Technology (ICAT), UNAM" data-es="Instituto de Ciencias Aplicadas y Tecnología (ICAT), UNAM">Institute of Applied Sciences and Technology (ICAT), UNAM</div>
           <div class="tl-loc">Mexico City</div>
           <ul class="tl-bullets">
-            <li data-en="Implementation of modern cryptographic algorithms across software platforms and FPGAs"
-                data-es="Implementación de algoritmos criptográficos modernos en plataformas de software y FPGAs">
-              Implementation of modern cryptographic algorithms across software platforms and FPGAs
-            </li>
-            <li data-en="Integration of algorithms according to international standards in hardware security modules"
-                data-es="Integración de algoritmos según estándares internacionales en módulos de seguridad hardware">
-              Integration of algorithms according to international standards in hardware security modules
-            </li>
-            <li data-en="Applied fundamentals of quantum computing to security protocol design"
-                data-es="Fundamentos de computación cuántica aplicados al diseño de protocolos de seguridad">
-              Applied fundamentals of quantum computing to security protocol design
-            </li>
+            <li data-en="Implementation of modern cryptographic algorithms across software platforms and FPGA development systems" data-es="Implementación de algoritmos criptográficos modernos en plataformas de software y sistemas FPGA">Implementation of modern cryptographic algorithms across software platforms and FPGA development systems</li>
+            <li data-en="Integration of algorithms according to international standards in hardware security modules" data-es="Integración de algoritmos según estándares internacionales en módulos de seguridad hardware">Integration of algorithms according to international standards in hardware security modules</li>
+            <li data-en="Applied fundamentals of quantum computing to security protocol design" data-es="Fundamentos de computación cuántica aplicados al diseño de protocolos de seguridad">Applied fundamentals of quantum computing to security protocol design</li>
           </ul>
         </div>
       </div>
@@ -533,17 +583,11 @@
         <div class="timeline-date">2024</div>
         <div>
           <div class="tl-title" data-en="Research Volunteer" data-es="Investigador Voluntario">Research Volunteer</div>
-          <div class="tl-org" data-en="Biomedical Research Institute, UNAM" data-es="Instituto de Investigaciones Biomédicas, UNAM">Biomedical Research Institute, UNAM</div>
+          <div class="tl-org" data-en="Biomedical Research Institute (IIBm), UNAM" data-es="Instituto de Investigaciones Biomédicas (IIBm), UNAM">Biomedical Research Institute (IIBm), UNAM</div>
           <div class="tl-loc">Mexico City</div>
           <ul class="tl-bullets">
-            <li data-en="Mathematical modeling for personalized tuberculosis treatments using stochastic differential equations"
-                data-es="Modelado matemático para tratamientos personalizados de tuberculosis usando ecuaciones diferenciales estocásticas">
-              Mathematical modeling for personalized tuberculosis treatments using stochastic differential equations
-            </li>
-            <li data-en="Co-authorship of chapters in a mathematical biology book"
-                data-es="Coautoría de capítulos en libro de biología matemática">
-              Co-authorship of chapters in a mathematical biology book
-            </li>
+            <li data-en="Mathematical modeling for personalized tuberculosis treatments using stochastic differential equations" data-es="Modelado matemático para tratamientos personalizados de tuberculosis usando ecuaciones diferenciales estocásticas">Mathematical modeling for personalized tuberculosis treatments using stochastic differential equations</li>
+            <li data-en="Co-authorship of chapters in a mathematical biology book" data-es="Coautoría de capítulos en libro de biología matemática">Co-authorship of chapters in a mathematical biology book</li>
           </ul>
         </div>
       </div>
@@ -555,14 +599,8 @@
           <div class="tl-org">IIMAS, UNAM</div>
           <div class="tl-loc">Mexico City</div>
           <ul class="tl-bullets">
-            <li data-en="Research in bio-inspired algorithms and their practical applications"
-                data-es="Investigación en algoritmos bioinspirados y sus aplicaciones prácticas">
-              Research in bio-inspired algorithms and their practical applications
-            </li>
-            <li data-en="Implementation of evolution-based optimization models"
-                data-es="Implementación de modelos de optimización basados en evolución">
-              Implementation of evolution-based optimization models
-            </li>
+            <li data-en="Research in bio-inspired algorithms and practical optimization applications" data-es="Investigación en algoritmos bioinspirados y aplicaciones de optimización práctica">Research in bio-inspired algorithms and practical optimization applications</li>
+            <li data-en="Implementation of evolution-based optimization models" data-es="Implementación de modelos de optimización basados en evolución">Implementation of evolution-based optimization models</li>
           </ul>
         </div>
       </div>
@@ -571,21 +609,11 @@
         <div class="timeline-date">2022–2024</div>
         <div>
           <div class="tl-title" data-en="Academic Advisor" data-es="Consejero Académico">Academic Advisor</div>
-          <div class="tl-org"
-               data-en="Academic Council of Physical-Mathematical Sciences, UNAM"
-               data-es="Consejo Académico del Área de Ciencias Físico Matemáticas, UNAM">
-            Academic Council of Physical-Mathematical Sciences, UNAM
-          </div>
+          <div class="tl-org" data-en="Academic Council of Physical-Mathematical Sciences, UNAM" data-es="Consejo Académico del Área de Ciencias Físico Matemáticas, UNAM">Academic Council of Physical-Mathematical Sciences, UNAM</div>
           <div class="tl-loc">Mexico City</div>
           <ul class="tl-bullets">
-            <li data-en="Student representation of the Faculty of Sciences before university governing bodies"
-                data-es="Representación estudiantil de la Facultad de Ciencias ante órganos de gobierno universitario">
-              Student representation of the Faculty of Sciences before university governing bodies
-            </li>
-            <li data-en="Coordination of academic initiatives for students university-wide"
-                data-es="Coordinación de iniciativas académicas estudiantiles a nivel universitario">
-              Coordination of academic initiatives for students university-wide
-            </li>
+            <li data-en="Student representation of the Faculty of Sciences before university governing bodies" data-es="Representación estudiantil de la Facultad de Ciencias ante órganos de gobierno universitario">Student representation of the Faculty of Sciences before university governing bodies</li>
+            <li data-en="Coordination of academic initiatives for students university-wide" data-es="Coordinación de iniciativas académicas estudiantiles a nivel universitario">Coordination of academic initiatives for students university-wide</li>
           </ul>
         </div>
       </div>
@@ -597,18 +625,8 @@
           <div class="tl-org">Animathica</div>
           <div class="tl-loc" data-en="Independent student project" data-es="Proyecto estudiantil independiente">Independent student project</div>
           <ul class="tl-bullets">
-            <li data-en="Creation of didactic mathematical visualizations using Python (OOP)"
-                data-es="Creación de visualizaciones matemáticas didácticas con Python (POO)">
-              Creation of didactic mathematical visualizations using Python (OOP)
-            </li>
-            <li data-en="Animation of undergraduate-level linear algebra and multivariate calculus concepts"
-                data-es="Animación de conceptos de álgebra lineal y cálculo multivariado a nivel licenciatura">
-              Animation of undergraduate-level linear algebra and multivariate calculus concepts
-            </li>
-            <li data-en="Instruction of introductory Python course"
-                data-es="Impartición de curso introductorio a Python">
-              Instruction of introductory Python course
-            </li>
+            <li data-en="Creation of didactic mathematical visualizations using Python (OOP); animation of linear algebra and multivariate calculus concepts" data-es="Creación de visualizaciones matemáticas didácticas con Python (POO); animación de conceptos de álgebra lineal y cálculo multivariado">Creation of didactic mathematical visualizations using Python (OOP); animation of linear algebra and multivariate calculus concepts</li>
+            <li data-en="Instruction of introductory Python course" data-es="Impartición de curso introductorio a Python">Instruction of introductory Python course</li>
           </ul>
         </div>
       </div>
@@ -618,113 +636,137 @@
 </div>
 
 <!-- ══ EDUCATION ══ -->
-<div class="section-wrap alt" id="education">
+<div class="section-wrap" id="education">
   <div class="section-inner">
     <div class="section-label" data-en="ACADEMIC BACKGROUND" data-es="FORMACIÓN ACADÉMICA">ACADEMIC BACKGROUND</div>
     <h2 data-en="Education" data-es="Educación">Education</h2>
     <div class="edu-card">
       <h3 data-en="Bachelor's in Applied Mathematics" data-es="Licenciatura en Matemáticas Aplicadas">Bachelor's in Applied Mathematics</h3>
-      <div class="edu-meta"
-           data-en="Faculty of Sciences · UNAM · Mexico City · 2020–2025"
-           data-es="Facultad de Ciencias · UNAM · Ciudad de México · 2020–2025">
-        Faculty of Sciences · UNAM · Mexico City · 2020–2025
-      </div>
+      <div class="edu-meta" data-en="Faculty of Sciences · UNAM · Mexico City · 2020–2025" data-es="Facultad de Ciencias · UNAM · Ciudad de México · 2020–2025">Faculty of Sciences · UNAM · Mexico City · 2020–2025</div>
       <div class="edu-gpa">GPA: 9.36 / 10.0</div>
       <div class="edu-thesis"
-           data-en="Thesis: <em>Stochastic Model of the Consensus Process Dynamics in the Blockchain using Population Genetics Tools</em>"
-           data-es="Tesis: <em>Modelo Estocástico de la Dinámica del Proceso de Consenso en Blockchain usando Herramientas de Genética de Poblaciones</em>">
-        Thesis: <em>Stochastic Model of the Consensus Process Dynamics in the Blockchain using Population Genetics Tools</em>
+           data-en="&lt;p&gt;Thesis: &lt;em&gt;Stochastic Model of the Consensus Process Dynamics in the Blockchain using Population Genetics Tools&lt;/em&gt;&lt;/p&gt;&lt;p&gt;The first study of its kind to produce formal analytical results for blockchain consensus dynamics, a domain previously lacking closed-form probabilistic descriptions. Develops models using Phase Type distributions, capturing the full dynamics of fork formation, chain reorganization, and adversarial attack scenarios under both Proof of Work and Proof of Stake. Core contributions include closed-form expressions for the probability of successful attacks and quantitative characterization of network vulnerability as a function of adversarial hash power or stake, with a framework designed for generalizability across consensus mechanisms.&lt;/p&gt;"
+           data-es="&lt;p&gt;Tesis: &lt;em&gt;Modelo Estocástico de la Dinámica del Proceso de Consenso en Blockchain usando Herramientas de Genética de Poblaciones&lt;/em&gt;&lt;/p&gt;&lt;p&gt;El primer estudio de su tipo en producir resultados analíticos formales para la dinámica del consenso blockchain, un dominio que anteriormente carecía de descripciones probabilísticas cerradas. Desarrolla modelos usando distribuciones Phase Type, capturando la dinámica completa de la formación de forks, reorganizaciones de cadena y escenarios de ataque adversarial bajo Proof of Work y Proof of Stake. Las contribuciones principales incluyen expresiones cerradas para la probabilidad de ataques exitosos y caracterización cuantitativa de la vulnerabilidad de la red en función del hash power o stake adversarial.&lt;/p&gt;">
+        <p>Thesis: <em>Stochastic Model of the Consensus Process Dynamics in the Blockchain using Population Genetics Tools</em></p>
+        <p>The first study of its kind to produce formal analytical results for blockchain consensus dynamics, a domain previously lacking closed-form probabilistic descriptions. Develops models using Phase Type distributions, capturing the full dynamics of fork formation, chain reorganization, and adversarial attack scenarios under both Proof of Work and Proof of Stake. Core contributions include closed-form expressions for the probability of successful attacks and quantitative characterization of network vulnerability as a function of adversarial hash power or stake.</p>
       </div>
     </div>
   </div>
 </div>
 
 <!-- ══ SKILLS ══ -->
-<div class="section-wrap" id="skills">
+<div class="section-wrap alt" id="skills">
   <div class="section-inner">
     <div class="section-label" data-en="WHAT I KNOW" data-es="QUÉ SÉ HACER">WHAT I KNOW</div>
     <h2 data-en="Technical Skills" data-es="Habilidades Técnicas">Technical Skills</h2>
     <div class="skills-grid">
 
       <div class="skill-group">
+        <h3 data-en="Blockchain &amp; Web3" data-es="Blockchain y Web3">Blockchain &amp; Web3</h3>
+        <div class="tags">
+          <span class="tag hi">Solidity</span>
+          <span class="tag hi">Hardhat</span>
+          <span class="tag hi">Hyperledger Besu (QBFT)</span>
+          <span class="tag hi">viem</span>
+          <span class="tag hi">ethers.js</span>
+          <span class="tag hi">OpenZeppelin</span>
+          <span class="tag">Smart Contract Security &amp; Auditing</span>
+          <span class="tag">DApp Architecture</span>
+          <span class="tag">ERC-20 / ERC-721</span>
+          <span class="tag">DeFi (MakerDAO, Compound, Aave, Uniswap)</span>
+          <span class="tag">Consensus Mechanisms (PoW / PoS)</span>
+          <span class="tag">Tokenization &amp; Digital Assets</span>
+          <span class="tag">On-chain Governance</span>
+          <span class="tag">Gas Optimization</span>
+          <span class="tag">Fuzz / Invariant Testing</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3 data-en="Mathematics" data-es="Matemáticas">Mathematics</h3>
+        <div class="tags">
+          <span class="tag hi">Phase Type Distributions</span>
+          <span class="tag hi">Stochastic Processes &amp; Markov Chains</span>
+          <span class="tag hi">Probability Theory &amp; Statistical Inference</span>
+          <span class="tag">Mathematical Modeling</span>
+          <span class="tag">Game Theory &amp; Mechanism Design</span>
+          <span class="tag">Graph Theory &amp; Network Analysis</span>
+          <span class="tag">Population Dynamics &amp; Evolutionary Models</span>
+          <span class="tag">Coding Theory</span>
+          <span class="tag">Optimization</span>
+          <span class="tag">Formal Verification</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3 data-en="Cryptography" data-es="Criptografía">Cryptography</h3>
+        <div class="tags">
+          <span class="tag hi">ECC</span>
+          <span class="tag hi">Zero-Knowledge Proofs (ZKPs)</span>
+          <span class="tag">SHA-256 / Keccak</span>
+          <span class="tag">Merkle Trees &amp; Proofs</span>
+          <span class="tag">ECDSA / EdDSA / Schnorr</span>
+          <span class="tag">AES-256-GCM</span>
+          <span class="tag">X25519 / ECDH / HKDF</span>
+          <span class="tag">Multi-Party Computation (MPC)</span>
+          <span class="tag">Post-Quantum (Kyber, Dilithium, NTRU)</span>
+          <span class="tag">Hardware Security Modules</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
         <h3 data-en="AI &amp; LLMs" data-es="IA y LLMs">AI &amp; LLMs</h3>
         <div class="tags">
-          <span class="tag hi">LLM Integration</span>
-          <span class="tag hi">Prompt Engineering</span>
-          <span class="tag hi">LangChain</span>
-          <span class="tag hi">LlamaIndex</span>
-          <span class="tag hi">RAG</span>
-          <span class="tag">Vector Search</span>
-          <span class="tag">Embedding Models</span>
+          <span class="tag">LLM Integration</span>
+          <span class="tag">Prompt Engineering</span>
+          <span class="tag">LangChain</span>
+          <span class="tag">LlamaIndex</span>
+          <span class="tag">RAG</span>
+          <span class="tag">Vector Search &amp; Embeddings</span>
           <span class="tag">Streaming / Async LLM</span>
+          <span class="tag">Claude Code · Cursor · Gemini</span>
         </div>
       </div>
 
       <div class="skill-group">
-        <h3>Frontend</h3>
+        <h3 data-en="Development" data-es="Desarrollo">Development</h3>
         <div class="tags">
-          <span class="tag">React</span>
-          <span class="tag">Angular</span>
           <span class="tag">TypeScript</span>
-          <span class="tag">Responsive Design</span>
-          <span class="tag">Component Architecture</span>
-          <span class="tag">Multi-tenant UI</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <h3 data-en="Backend &amp; APIs" data-es="Backend y APIs">Backend &amp; APIs</h3>
-        <div class="tags">
-          <span class="tag">Node.js</span>
-          <span class="tag">C#</span>
           <span class="tag">Python</span>
-          <span class="tag">RESTful APIs</span>
-          <span class="tag">SQL &amp; NoSQL</span>
-          <span class="tag">Backend Performance</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <h3 data-en="DevOps &amp; Cloud" data-es="DevOps y Nube">DevOps &amp; Cloud</h3>
-        <div class="tags">
-          <span class="tag">AWS</span>
-          <span class="tag">Azure</span>
-          <span class="tag">Docker</span>
-          <span class="tag">Kubernetes</span>
-          <span class="tag">CI/CD</span>
-          <span class="tag">Git</span>
-          <span class="tag">Agile / Scrum</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <h3 data-en="Mathematics &amp; Cryptography" data-es="Matemáticas y Criptografía">Mathematics &amp; Cryptography</h3>
-        <div class="tags">
-          <span class="tag hi">Stochastic Processes</span>
-          <span class="tag hi">Markov Chains</span>
-          <span class="tag hi">Probability Theory</span>
-          <span class="tag">Mathematical Modeling</span>
-          <span class="tag">ECC</span>
-          <span class="tag">Zero-Knowledge Proofs</span>
-          <span class="tag">Post-Quantum Cryptography</span>
-          <span class="tag">Smart Contracts (Solidity)</span>
-          <span class="tag">Blockchain</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <h3 data-en="Programming Languages" data-es="Lenguajes de Programación">Programming Languages</h3>
-        <div class="tags">
-          <span class="tag">Python</span>
-          <span class="tag">TypeScript</span>
+          <span class="tag">Rust</span>
           <span class="tag">JavaScript</span>
-          <span class="tag">C#</span>
           <span class="tag">C / C++</span>
           <span class="tag">SQL</span>
           <span class="tag">Java</span>
           <span class="tag">MATLAB</span>
           <span class="tag">Julia</span>
           <span class="tag">R</span>
+          <span class="tag">Node.js / Express</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">C#</span>
+          <span class="tag">React</span>
+          <span class="tag">Angular</span>
+          <span class="tag">Vite / Tailwind</span>
+          <span class="tag">D3.js</span>
+          <span class="tag">WebSockets</span>
+          <span class="tag">Prisma</span>
+          <span class="tag">PostgreSQL / MongoDB / Snowflake</span>
+          <span class="tag">PySpark / Databricks</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3 data-en="Infrastructure &amp; DevOps" data-es="Infraestructura y DevOps">Infrastructure &amp; DevOps</h3>
+        <div class="tags">
+          <span class="tag">AWS</span>
+          <span class="tag">Azure / ADLS</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Kubernetes</span>
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">Azure DevOps</span>
+          <span class="tag">CI/CD</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Agile / Scrum</span>
         </div>
       </div>
 
@@ -733,11 +775,33 @@
 </div>
 
 <!-- ══ ACHIEVEMENTS ══ -->
-<div class="section-wrap alt" id="achievements">
+<div class="section-wrap" id="achievements">
   <div class="section-inner">
     <div class="section-label" data-en="MORE ABOUT ME" data-es="MÁS SOBRE MÍ">MORE ABOUT ME</div>
     <h2 data-en="Achievements &amp; Languages" data-es="Logros e Idiomas">Achievements &amp; Languages</h2>
-    <div class="ach-grid">
+
+    <div class="section-label" style="margin-bottom: 0.75rem; margin-top: 0;"
+         data-en="BLOCKCHAIN CERTIFICATIONS" data-es="CERTIFICACIONES BLOCKCHAIN">BLOCKCHAIN CERTIFICATIONS</div>
+    <div class="cert-list">
+      <div class="cert-item">
+        <div class="cert-dot"></div>
+        <div><a href="https://www.coursera.org/account/accomplishments/specialization/certificate/2SMRJ2XHFVQU" target="_blank" rel="noopener" data-en="Blockchain Specialization" data-es="Especialización en Blockchain">Blockchain Specialization</a> <span>, University at Buffalo / SUNY, Coursera</span></div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-dot"></div>
+        <div><a href="https://www.coursera.org/account/accomplishments/specialization/QI7KT0W18IDD" target="_blank" rel="noopener" data-en="Decentralized Finance (DeFi): The Future of Finance" data-es="Finanzas Descentralizadas (DeFi): El Futuro de las Finanzas">Decentralized Finance (DeFi): The Future of Finance</a> <span>, Duke University, Coursera</span></div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-dot"></div>
+        <div><a href="https://www.coursera.org/account/accomplishments/specialization/SY4WSAPGRT4R" target="_blank" rel="noopener" data-en="Building DApps in Ethereum Blockchain" data-es="Construcción de DApps en Blockchain Ethereum">Building DApps in Ethereum Blockchain</a> <span>, EDUCBA, Coursera</span></div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-dot"></div>
+        <div><a href="https://www.coursera.org/account/accomplishments/specialization/Z31KHIX25CG8" target="_blank" rel="noopener" data-en="Blockchain Solution Architecture Specialization" data-es="Especialización en Arquitectura de Soluciones Blockchain">Blockchain Solution Architecture Specialization</a> <span>, LearnQuest, Coursera</span></div>
+      </div>
+    </div>
+
+    <div class="ach-grid" style="margin-top: 1.5rem;">
       <div class="ach-card">
         <div class="ach-label" data-en="Human Languages" data-es="Idiomas">Human Languages</div>
         <div class="ach-value"
@@ -749,17 +813,17 @@
       <div class="ach-card">
         <div class="ach-label" data-en="Math Olympiads" data-es="Olimpiadas de Matemáticas">Math Olympiads</div>
         <div class="ach-value"
-             data-en="3 silver medals — Mexico City Mathematical Olympiad"
-             data-es="3 medallas de plata — Olimpiada de Matemáticas del Distrito Federal">
-          3 silver medals — Mexico City Mathematical Olympiad
+             data-en="3 silver medals, Mexico City Mathematical Olympiad"
+             data-es="3 medallas de plata, Olimpiada de Matemáticas del Distrito Federal">
+          3 silver medals, Mexico City Mathematical Olympiad
         </div>
       </div>
       <div class="ach-card">
         <div class="ach-label" data-en="Soft Skills" data-es="Aptitudes">Soft Skills</div>
         <div class="ach-value"
-             data-en="Leadership · Teamwork · Analytical thinking · Effective communication · Self-directed learning"
-             data-es="Liderazgo · Trabajo en equipo · Pensamiento analítico · Comunicación efectiva · Autodidacta">
-          Leadership · Teamwork · Analytical thinking · Effective communication · Self-directed learning
+             data-en="Leadership · Teamwork · Analytical thinking · Effective communication · Initiative · Self-directed learning"
+             data-es="Liderazgo · Trabajo en equipo · Pensamiento analítico · Comunicación efectiva · Iniciativa · Autodidacta">
+          Leadership · Teamwork · Analytical thinking · Effective communication · Initiative · Self-directed learning
         </div>
       </div>
     </div>
@@ -769,23 +833,19 @@
 <!-- ══ FOOTER ══ -->
 <footer>
   <p>Luis Darío Ortiz Izquierdo &nbsp;·&nbsp; Mexico City &nbsp;·&nbsp;
-    <a href="mailto:dariortiz215@gmail.com">dariortiz215@gmail.com</a>
+    <a href="mailto:dariortiz@protonmail.com">dariortiz@protonmail.com</a>
   </p>
 </footer>
 
 <script>
   function setLang(lang) {
-    // Switch all data-en / data-es elements
     document.querySelectorAll('[data-en]').forEach(function(el) {
       var val = el.getAttribute('data-' + lang);
       if (val !== null) el.innerHTML = val;
     });
-
-    // Toggle active button
     document.querySelectorAll('.lang-btn').forEach(function(btn) {
       btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
     });
-
     document.documentElement.lang = lang;
   }
 </script>
