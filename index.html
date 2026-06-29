@@ -327,6 +327,38 @@
     .ach-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--rose); margin-bottom: 0.35rem; }
     .ach-value { font-size: 0.875rem; color: var(--text); line-height: 1.5; }
 
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.88); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .hero-text h1             { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; animation-delay: 0.05s; }
+    .hero-text .hero-title    { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; animation-delay: 0.18s; }
+    .hero-text .hero-location { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; animation-delay: 0.28s; }
+    .hero-text .hero-links    { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; animation-delay: 0.4s; }
+    .hero-avatar { animation: scaleIn 0.8s cubic-bezier(0.22,1,0.36,1) both; animation-delay: 0.1s; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .project-card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 36px rgba(76,29,149,0.16);
+    }
+
     /* ── FOOTER ── */
     footer { text-align: center; padding: 2.25rem 2rem; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border); }
     footer a { color: var(--purple-mid); text-decoration: none; }
@@ -424,26 +456,30 @@
       <div class="project-card">
         <div class="project-card-header">
           <div>
-            <h3>Concord</h3>
+            <h3>Concord (CCCPO)</h3>
             <div class="proj-meta" data-en="PwC Hackathon · 2026 · Tech Lead (3-person team)" data-es="Hackathon PwC · 2026 · Tech Lead (equipo de 3)">PwC Hackathon · 2026 · Tech Lead (3-person team)</div>
           </div>
         </div>
         <ul>
-          <li data-en="End-to-end blockchain insurance settlement platform on a 4-node Hyperledger Besu QBFT consortium: 14 Solidity contracts (~2,100 LOC) covering claim orchestration, multilateral settlement netting, catastrophe relief pools, multisig carrier approval, credential registries, and dispute management"
-              data-es="Plataforma blockchain de liquidación de seguros end-to-end en un consorcio Hyperledger Besu QBFT de 4 nodos: 14 contratos Solidity (~2.100 LOC) para orquestación de reclamos, netting multilateral, pools de catástrofes, aprobación multisig, registros de credenciales y gestión de disputas">
-            End-to-end blockchain insurance settlement platform on a 4-node Hyperledger Besu QBFT consortium: 14 Solidity contracts (~2,100 LOC) covering claim orchestration, multilateral settlement netting, catastrophe relief pools, multisig carrier approval, credential registries, and dispute management
+          <li data-en="AI-driven, blockchain-settled P&amp;C insurance claims platform built for the PwC Industry Innovation Day 2026 hackathon: &quot;AI decides → the ledger executes&quot;"
+              data-es="Plataforma de reclamos de seguros impulsada por IA y liquidada en blockchain para el hackathon PwC 2026: &quot;la IA decide → el ledger ejecuta&quot;">
+            AI-driven, blockchain-settled P&amp;C insurance claims platform built for the PwC Industry Innovation Day 2026 hackathon: "AI decides → the ledger executes"
           </li>
-          <li data-en="Node/TypeScript control plane (~40 REST endpoints + WebSocket live events) integrated via viem; chain event indexer projecting on-chain state into a Prisma/PostgreSQL read model; off-chain workers for settlement netting and fraud-ring graph computation; X25519/AES-256-GCM envelope encryption for party-scoped sensitive data"
-              data-es="Control plane Node/TypeScript (~40 endpoints REST + eventos WebSocket en vivo) integrado via viem; indexador de eventos on-chain proyectado en modelo de lectura Prisma/PostgreSQL; workers off-chain para netting de liquidación y cómputo de grafos de fraude; cifrado X25519/AES-256-GCM por parte">
-            Node/TypeScript control plane (~40 REST endpoints + WebSocket live events) integrated via viem; chain event indexer projecting on-chain state into a Prisma/PostgreSQL read model; off-chain workers for settlement netting and fraud-ring graph computation; X25519/AES-256-GCM envelope encryption for party-scoped sensitive data
+          <li data-en="14 Solidity contracts on a 4-node Hyperledger Besu QBFT consortium: claim orchestration, multilateral subrogation netting, Merkle catastrophe payouts, custom 2-of-N carrier multisig, RBAC, dispute management"
+              data-es="14 contratos Solidity en consorcio Hyperledger Besu QBFT de 4 nodos: orquestación, netting multilateral, pagos Merkle, multisig personalizado, RBAC, gestión de disputas">
+            14 Solidity contracts on a 4-node Hyperledger Besu QBFT consortium: claim orchestration, multilateral subrogation netting, Merkle catastrophe payouts, custom 2-of-N carrier multisig, RBAC, dispute management
           </li>
-          <li data-en="React/Vite console with 17 role-scoped views, live WebSocket data, and D3 force-directed fraud-ring visualizations; RBAC across 5 roles; Merkle-proof distributions for scalable catastrophe payouts"
-              data-es="Consola React/Vite con 17 vistas por rol, datos WebSocket en vivo y visualizaciones D3 de grafos de fraude; RBAC en 5 roles; distribuciones con prueba Merkle para pagos escalables de catástrofes">
-            React/Vite console with 17 role-scoped views, live WebSocket data, and D3 force-directed fraud-ring visualizations; RBAC across 5 roles; Merkle-proof distributions for scalable catastrophe payouts
+          <li data-en="10 AI capabilities: LLM triage and liability, multimodal vision, cross-carrier fraud-ring graph (graphology), perceptual-hash evidence provenance, RAG adjuster copilot with on-chain citations; record-and-replay cache for $0 deterministic demos"
+              data-es="10 capacidades de IA: triaje LLM, visión multimodal, grafo de fraude cross-carrier (graphology), procedencia por hash perceptual, copilot RAG con citas on-chain; caché para demos a $0">
+            10 AI capabilities: LLM triage and liability, multimodal vision, cross-carrier fraud-ring graph (graphology), perceptual-hash evidence provenance, RAG adjuster copilot with on-chain citations; record-and-replay cache for $0 deterministic demos
           </li>
-          <li data-en="~1,860 automated tests at ~98% line coverage; GitHub Actions CI; Hardhat toolchain with gas-regression snapshot ceilings and fuzz/invariant testing"
-              data-es="~1.860 pruebas automatizadas con ~98% de cobertura; CI con GitHub Actions; toolchain Hardhat con límites de gas-regression y pruebas fuzz/invariant">
-            ~1,860 automated tests at ~98% line coverage; GitHub Actions CI; Hardhat toolchain with gas-regression snapshot ceilings and fuzz/invariant testing
+          <li data-en="Node/TypeScript control plane (viem chain-writer, chain event indexer, Prisma/PostgreSQL, WebSocket, X25519/AES-256-GCM encryption); React/Vite console with 17 role-scoped views and D3 fraud-ring visualizations"
+              data-es="Control plane Node/TypeScript (chain-writer viem, indexador on-chain, Prisma/PostgreSQL, WebSocket, cifrado X25519/AES-256-GCM); consola React/Vite con 17 vistas y visualizaciones D3">
+            Node/TypeScript control plane (viem chain-writer, chain event indexer, Prisma/PostgreSQL, WebSocket, X25519/AES-256-GCM encryption); React/Vite console with 17 role-scoped views and D3 fraud-ring visualizations
+          </li>
+          <li data-en="~1,860 tests at ~98% coverage; CI with coverage gates, gas snapshots, fuzz/invariant testing; 223-entry findings register; ~518 commits over 2 weeks"
+              data-es="~1.860 pruebas con ~98% de cobertura; CI con gates de cobertura, gas snapshots, pruebas fuzz/invariant; 223 hallazgos registrados; ~518 commits en 2 semanas">
+            ~1,860 tests at ~98% coverage; CI with coverage gates, gas snapshots, fuzz/invariant testing; 223-entry findings register; ~518 commits over 2 weeks
           </li>
         </ul>
         <div class="proj-tags">
@@ -451,9 +487,12 @@
           <span class="proj-tag">Hyperledger Besu</span>
           <span class="proj-tag">TypeScript</span>
           <span class="proj-tag">viem</span>
+          <span class="proj-tag">LLM</span>
+          <span class="proj-tag">Multimodal Vision</span>
+          <span class="proj-tag">RAG</span>
           <span class="proj-tag">React</span>
-          <span class="proj-tag">Hardhat</span>
           <span class="proj-tag">D3.js</span>
+          <span class="proj-tag">Hardhat</span>
           <span class="proj-tag">PostgreSQL</span>
         </div>
       </div>
@@ -838,6 +877,35 @@
 </footer>
 
 <script>
+  // Scroll-triggered reveal with stagger
+  (function() {
+    var soloTargets = document.querySelectorAll(
+      '.edu-card, .section-inner h2, .profile-text'
+    );
+    var groupSelectors = ['.project-card', '.timeline-item', '.cert-item', '.ach-card'];
+
+    soloTargets.forEach(function(el) { el.classList.add('reveal'); });
+
+    groupSelectors.forEach(function(sel) {
+      document.querySelectorAll(sel).forEach(function(el, i) {
+        el.classList.add('reveal');
+        el.style.transitionDelay = (i * 80) + 'ms';
+      });
+    });
+
+    var all = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    all.forEach(function(el) { observer.observe(el); });
+  })();
+
   function setLang(lang) {
     document.querySelectorAll('[data-en]').forEach(function(el) {
       var val = el.getAttribute('data-' + lang);
