@@ -1293,31 +1293,40 @@
     });
   });
 
-  // Ring rotates toward cursor when cursor is nearby; photo face counter-rotates to stay upright
+  // Ring spins freely as cursor orbits the photo; face counter-rotates to stay upright
   (function() {
     var photo  = document.querySelector('.hero-photo');
     var avatar = document.querySelector('.hero-avatar');
     if (!photo) return;
 
-    var INNER_R = 72;   // dead zone: cursor this close to center = no rotation
-    var OUTER_R = 320;  // beyond this = no rotation
-    var MAX_DEG = 28;
+    var INNER_R = 72;   // dead zone radius
+    var OUTER_R = 320;  // active zone outer limit
 
-    var current = 0, target = 0, raf = null;
+    var totalRot   = 0;   // accumulated target rotation (degrees, unbounded)
+    var displayRot = 0;   // current rendered rotation (lerped toward totalRot)
+    var prevAngle  = null;
+    var inZone     = false;
+    var raf        = null;
+
+    function applyTransform() {
+      var s = displayRot.toFixed(2);
+      photo.style.transform  = displayRot === 0 ? '' : 'rotate(' + s + 'deg)';
+      if (avatar) avatar.style.transform = displayRot === 0 ? '' : 'rotate(-' + s + 'deg)';
+    }
 
     function step() {
-      var diff = target - current;
-      if (Math.abs(diff) < 0.03) {
-        current = target;
-        photo.style.transform  = target === 0 ? '' : 'rotate(' + target.toFixed(2) + 'deg)';
-        if (avatar) avatar.style.transform = target === 0 ? '' : 'rotate(' + (-target).toFixed(2) + 'deg)';
-        raf = null;
-        return;
+      raf = null;
+      if (inZone) {
+        // Instant tracking while orbiting
+        displayRot = totalRot;
+        applyTransform();
+      } else {
+        // Smooth spring back to 0
+        displayRot += (totalRot - displayRot) * 0.08;
+        if (Math.abs(displayRot) < 0.05) displayRot = 0;
+        applyTransform();
+        if (displayRot !== 0) raf = requestAnimationFrame(step);
       }
-      current += diff * 0.28;
-      photo.style.transform  = 'rotate(' + current.toFixed(2) + 'deg)';
-      if (avatar) avatar.style.transform = 'rotate(' + (-current).toFixed(2) + 'deg)';
-      raf = requestAnimationFrame(step);
     }
 
     setTimeout(function() {
@@ -1328,14 +1337,32 @@
         var dx   = e.clientX - cx;
         var dy   = e.clientY - cy;
         var dist = Math.sqrt(dx * dx + dy * dy);
+        var now  = dist >= INNER_R && dist <= OUTER_R;
 
-        if (dist < INNER_R || dist > OUTER_R) {
-          target = 0;
-        } else {
-          var t         = (dist - INNER_R) / (OUTER_R - INNER_R);
-          var intensity = 1 - t;                   // strongest near photo, fades out
-          target        = (dx / dist) * MAX_DEG * intensity;
+        if (!now) {
+          if (inZone) {
+            inZone    = false;
+            prevAngle = null;
+            totalRot  = 0;
+            if (!raf) raf = requestAnimationFrame(step);
+          }
+          return;
         }
+
+        if (!inZone) {
+          inZone    = true;
+          totalRot  = displayRot; // pick up from current visual position
+          prevAngle = null;
+        }
+
+        var angle = Math.atan2(dy, dx) * (180 / Math.PI);
+        if (prevAngle !== null) {
+          var delta = angle - prevAngle;
+          if (delta >  180) delta -= 360;
+          if (delta < -180) delta += 360;
+          totalRot += delta;
+        }
+        prevAngle = angle;
 
         if (!raf) raf = requestAnimationFrame(step);
       }, { passive: true });
