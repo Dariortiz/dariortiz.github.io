@@ -180,30 +180,39 @@
       width: 264px;
       height: 264px;
       border-radius: 50%;
-      background: var(--purple);
+      background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
-    .hero-photo::before {
-      content: '';
+    /* Ring is now handled by inline SVG — pseudo-elements unused */
+    .hero-photo::before, .hero-photo::after { display: none; }
+
+    /* SVG ring: rotated so stroke-dashoffset draws from 12 o'clock */
+    .ring-svg {
       position: absolute;
       inset: 0;
-      border-radius: 50%;
-      background: conic-gradient(from 0deg, #E91E8C, #7C3AED, #5F6CDA, #1E3A8A, #AB4155, #E91E8C);
-      opacity: 1;
-      animation: spinRing 3s linear infinite;
+      width: 100%;
+      height: 100%;
       z-index: 0;
+      transform: rotate(-90deg);
+      animation: spinRing 3s linear 0.65s infinite;
     }
-    .hero-photo::after {
-      content: '';
-      position: absolute;
-      inset: 6px;
-      border-radius: 50%;
-      background: #fff;
-      z-index: 1;
+    /* Gradient ring stroke — draws in, then spins */
+    .ring-draw {
+      stroke-dasharray: 811;
+      stroke-dashoffset: 811;
+      animation: ringStroke 0.65s ease-out forwards;
     }
-    @keyframes spinRing { to { transform: rotate(360deg); } }
+    /* White gap ring between gradient ring and photo — draws in with the gradient */
+    .ring-gap {
+      stroke-dasharray: 773;
+      stroke-dashoffset: 773;
+      animation: ringStroke 0.65s ease-out forwards;
+    }
+    @keyframes ringStroke { to { stroke-dashoffset: 0; } }
+    @keyframes spinRing   { from { transform: rotate(-90deg); } to { transform: rotate(270deg); } }
     .hero-avatar {
       position: relative;
       z-index: 2;
@@ -230,7 +239,10 @@
       font-weight: 600;
       margin-bottom: 0.4rem;
       letter-spacing: 0.01em;
+      cursor: default;
+      user-select: none;
     }
+    .hero-title.typeable { cursor: pointer; }
     .hero-location {
       font-size: 0.875rem;
       color: var(--text-muted);
@@ -469,7 +481,18 @@
       transform: scale(0.75) translateY(6px);
       transition: opacity 0.32s ease, transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .tag-pop.popped { opacity: 1; transform: none; }
+    .tag-pop.popped {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.32s ease, transform 0.18s cubic-bezier(0.34,1.56,0.64,1), background 0.18s, color 0.18s, border-color 0.18s;
+      cursor: default;
+    }
+    .tag-pop.popped:hover {
+      transform: scale(1.08) translateY(-2px);
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+    }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
@@ -484,7 +507,7 @@
     .hero-text .hero-title    { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; animation-delay: 0.18s; }
     .hero-text .hero-location { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; animation-delay: 0.28s; }
     .hero-text .hero-links    { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; animation-delay: 0.4s; }
-    .hero-avatar { animation: scaleIn 0.8s cubic-bezier(0.22,1,0.36,1) both; animation-delay: 0.1s; }
+    .hero-avatar { animation: scaleIn 0.6s cubic-bezier(0.22,1,0.36,1) both; animation-delay: 0.6s; }
 
     .reveal {
       opacity: 0;
@@ -495,12 +518,28 @@
       opacity: 1;
       transform: none;
     }
+    .reveal-left  { opacity: 0; transform: translateX(-44px); }
+    .reveal-right { opacity: 0; transform: translateX(44px); }
+    .project-card.reveal-left,
+    .project-card.reveal-right {
+      transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: none; }
     .project-card {
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
     .project-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 14px 36px rgba(76,29,149,0.16);
+      border-color: var(--purple);
+    }
+    .edu-card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, opacity 0.6s cubic-bezier(0.22,1,0.36,1);
+    }
+    .edu-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 36px rgba(76,29,149,0.16);
+      border-color: var(--purple);
     }
 
     /* ── TYPED CURSOR ── */
@@ -526,6 +565,7 @@
       nav { padding: 0 1rem; }
       .nav-links { display: none; }
       .timeline-item { grid-template-columns: 1fr; gap: 0.25rem; }
+      .timeline-item::before { display: none; }
       .timeline-date { text-align: left; }
       h2 { font-size: 1.5rem; }
       .hero { padding: 4rem 1.25rem 3.5rem; }
@@ -536,6 +576,90 @@
       .section-wrap { padding: 3.5rem 1.25rem; }
       .projects-grid { grid-template-columns: 1fr; }
     }
+    /* ── NAV UNDERLINE SLIDE ── */
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 2px;
+      background: var(--purple-mid);
+      border-radius: 1px;
+      transition: width 0.22s cubic-bezier(0.22,1,0.36,1);
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+
+    /* ── PROJ-TAG LIFT ── */
+    .proj-tag {
+      transition: transform 0.18s cubic-bezier(0.34,1.56,0.64,1), background 0.18s, color 0.18s, border-color 0.18s;
+      cursor: default;
+    }
+    .proj-tag:hover {
+      transform: scale(1.08) translateY(-2px);
+      background: var(--purple);
+      color: #fff;
+      border-color: var(--purple);
+    }
+
+    /* ── BUTTON RIPPLE ── */
+    .btn { position: relative; overflow: hidden; }
+    .btn-ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.32);
+      transform: scale(0);
+      pointer-events: none;
+      animation: rippleOut 0.55s ease-out forwards;
+    }
+    @keyframes rippleOut { to { transform: scale(4); opacity: 0; } }
+
+    /* ── THEME CROSSFADE ── */
+    .theme-transitioning *,
+    .theme-transitioning *::before,
+    .theme-transitioning *::after {
+      transition: background-color 0.35s ease, color 0.3s ease, border-color 0.35s ease !important;
+    }
+
+    /* ── HEADING UNDERLINE DRAW ── */
+    .section-inner h2 { position: relative; }
+    .section-inner h2::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -8px;
+      width: 48px; height: 3px;
+      background: linear-gradient(90deg, var(--purple), var(--rosa));
+      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1) 0.1s;
+    }
+    .section-inner h2.visible::after { transform: scaleX(1); }
+
+    /* ── TIMELINE DOT PULSE ── */
+    .timeline-item { position: relative; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: calc(150px + 1rem);
+      top: 0.4rem;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--purple-mid);
+      transform: translate(-50%, 0) scale(0);
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      z-index: 1;
+    }
+    .timeline-item.visible::before {
+      transform: translate(-50%, 0) scale(1);
+      animation: dotPulse 1.8s ease-out 0.4s;
+    }
+    @keyframes dotPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(124,58,237,0.5); }
+      70%  { box-shadow: 0 0 0 10px rgba(124,58,237,0); }
+      100% { box-shadow: 0 0 0 0 rgba(124,58,237,0); }
+    }
+
     /* ── PRINT ── */
     @media print {
       *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -606,6 +730,23 @@
       </div>
     </div>
     <div class="hero-photo">
+      <svg class="ring-svg" viewBox="0 0 264 264" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="ring-grad" gradientUnits="userSpaceOnUse" x1="264" y1="0" x2="0" y2="264">
+            <stop offset="0%"   stop-color="#E91E8C"/>
+            <stop offset="30%"  stop-color="#7C3AED"/>
+            <stop offset="55%"  stop-color="#1E3A8A"/>
+            <stop offset="80%"  stop-color="#AB4155"/>
+            <stop offset="100%" stop-color="#E91E8C"/>
+          </linearGradient>
+        </defs>
+        <!-- Gradient ring: r=129, stroke-width=6 → visible from r=126 to r=132 -->
+        <circle class="ring-draw" cx="132" cy="132" r="129"
+                fill="none" stroke="url(#ring-grad)" stroke-width="6"/>
+        <!-- White gap ring: r=123, stroke-width=6 → visible from r=120 to r=126 -->
+        <circle class="ring-gap" cx="132" cy="132" r="123"
+                fill="none" stroke="#fff" stroke-width="6"/>
+      </svg>
       <img src="headshot.jpg" alt="Luis Darío Ortiz Izquierdo" class="hero-avatar">
     </div>
   </div>
@@ -1061,7 +1202,7 @@
     var soloTargets = document.querySelectorAll(
       '.edu-card, .section-inner h2, .profile-text'
     );
-    var groupSelectors = ['.project-card', '.timeline-item', '.cert-item', '.ach-card'];
+    var groupSelectors = ['.timeline-item', '.cert-item', '.ach-card'];
 
     soloTargets.forEach(function(el) { el.classList.add('reveal'); });
 
@@ -1072,11 +1213,25 @@
       });
     });
 
-    var all = document.querySelectorAll('.reveal');
+    // Project cards: Concord slides from left, Obsignata from right
+    document.querySelectorAll('.project-card').forEach(function(el, i) {
+      el.classList.add(i === 0 ? 'reveal-left' : 'reveal-right');
+    });
+
+    var all = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
         if (e.isIntersecting) {
           e.target.classList.add('visible');
+          // After entrance finishes, remove directional class so hover uses normal 0.25s
+          if (e.target.classList.contains('reveal-left') || e.target.classList.contains('reveal-right')) {
+            e.target.addEventListener('transitionend', function handler(ev) {
+              if (ev.propertyName === 'transform') {
+                e.target.classList.remove('reveal-left', 'reveal-right', 'visible');
+                e.target.removeEventListener('transitionend', handler);
+              }
+            });
+          }
           observer.unobserve(e.target);
         }
       });
@@ -1138,6 +1293,70 @@
     });
   });
 
+  // Ring rotates toward cursor when cursor is nearby; photo face counter-rotates to stay upright
+  (function() {
+    var photo  = document.querySelector('.hero-photo');
+    var avatar = document.querySelector('.hero-avatar');
+    if (!photo) return;
+
+    var INNER_R = 72;   // dead zone: cursor this close to center = no rotation
+    var OUTER_R = 320;  // beyond this = no rotation
+    var MAX_DEG = 28;
+
+    var current = 0, target = 0, raf = null;
+
+    function step() {
+      var diff = target - current;
+      if (Math.abs(diff) < 0.03) {
+        current = target;
+        photo.style.transform  = target === 0 ? '' : 'rotate(' + target.toFixed(2) + 'deg)';
+        if (avatar) avatar.style.transform = target === 0 ? '' : 'rotate(' + (-target).toFixed(2) + 'deg)';
+        raf = null;
+        return;
+      }
+      current += diff * 0.28;
+      photo.style.transform  = 'rotate(' + current.toFixed(2) + 'deg)';
+      if (avatar) avatar.style.transform = 'rotate(' + (-current).toFixed(2) + 'deg)';
+      raf = requestAnimationFrame(step);
+    }
+
+    setTimeout(function() {
+      window.addEventListener('mousemove', function(e) {
+        var r    = photo.getBoundingClientRect();
+        var cx   = r.left + r.width  / 2;
+        var cy   = r.top  + r.height / 2;
+        var dx   = e.clientX - cx;
+        var dy   = e.clientY - cy;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < INNER_R || dist > OUTER_R) {
+          target = 0;
+        } else {
+          var t         = (dist - INNER_R) / (OUTER_R - INNER_R);
+          var intensity = 1 - t;                   // strongest near photo, fades out
+          target        = (dx / dist) * MAX_DEG * intensity;
+        }
+
+        if (!raf) raf = requestAnimationFrame(step);
+      }, { passive: true });
+    }, 1500);
+  })();
+
+  // Button click ripple
+  document.querySelectorAll('.btn').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      var r    = btn.getBoundingClientRect();
+      var size = Math.max(r.width, r.height);
+      var rip  = document.createElement('span');
+      rip.className = 'btn-ripple';
+      rip.style.width  = rip.style.height = size + 'px';
+      rip.style.left   = (e.clientX - r.left  - size / 2) + 'px';
+      rip.style.top    = (e.clientY - r.top   - size / 2) + 'px';
+      btn.appendChild(rip);
+      rip.addEventListener('animationend', function() { rip.remove(); });
+    });
+  });
+
   // Scroll progress bar
   (function() {
     var bar = document.getElementById('scroll-progress');
@@ -1182,43 +1401,87 @@
     var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     applyTheme(saved === 'dark' || (!saved && prefersDark));
     btn.addEventListener('click', function() {
-      applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+      var root = document.documentElement;
+      root.classList.add('theme-transitioning');
+      applyTheme(root.getAttribute('data-theme') !== 'dark');
+      setTimeout(function() { root.classList.remove('theme-transitioning'); }, 400);
     });
   })();
 
-  // Typewriter animation — cycles through titles then locks to combined final line
+  // Typewriter — cycles titles, locks to final line; click restarts with smiley easter egg
   (function() {
     var titles = {
       en: ['Applied Mathematician', 'Blockchain Engineer', 'Full-Stack Developer'],
       es: ['Matemático Aplicado', 'Ingeniero Blockchain', 'Desarrollador Full-Stack']
     };
-    var finals = {
-      en: 'Applied Mathematician · Blockchain Engineer · Full-Stack Developer',
-      es: 'Matemático Aplicado · Ingeniero Blockchain · Desarrollador Full-Stack'
-    };
-    var el = document.getElementById('typed-title');
-    var cursor = document.querySelector('.typed-cursor');
+    function getFinal() {
+      return currentOrder.map(function(i) { return titles[lang][i]; }).join(' · ');
+    }
+    var smileys   = [':)', ':D', 'xD'];
+    var orderings = [[0,1,2], [1,2,0], [2,0,1]];
+
+    var el        = document.getElementById('typed-title');
+    var cursor    = document.querySelector('.typed-cursor');
+    var heroTitle = document.querySelector('.hero-title');
     if (!el) return;
-    var lang = 'en', idx = 0, charIdx = 0, deleting = false, done = false, timer;
+
+    var lang         = 'en';
+    var idx          = 0;
+    var charIdx      = 0;
+    var deleting     = false;
+    var done         = false;
+    var restarting   = false;
+    var sneaking     = false;
+    var restartCount = 0;
+    var currentOrder = [0,1,2];
+    var timer;
+
+    function showCursor() {
+      if (!cursor) return;
+      cursor.style.transition = '';
+      cursor.style.animation  = '';
+      cursor.style.opacity    = '';
+    }
+
+    function currentWord() {
+      if (idx >= currentOrder.length) return getFinal();
+      return titles[lang][currentOrder[idx]];
+    }
 
     function tick() {
       if (done) return;
-      var isFinal = idx >= titles[lang].length;
-      var word = isFinal ? finals[lang] : titles[lang][idx];
 
+      if (sneaking) {
+        var smiley = smileys[(restartCount - 1) % 3];
+        el.textContent = smiley.slice(0, ++charIdx);
+        if (charIdx >= smiley.length) {
+          sneaking = false;
+          timer = setTimeout(function() {
+            el.textContent = '';
+            idx = 0; charIdx = 0;
+            timer = setTimeout(tick, 300);
+          }, 700);
+        } else {
+          timer = setTimeout(tick, 90);
+        }
+        return;
+      }
+
+      var word = currentWord();
       if (!deleting) {
         el.textContent = word.slice(0, ++charIdx);
         if (charIdx === word.length) {
-          if (isFinal) {
+          if (idx >= currentOrder.length) {
             done = true;
+            if (heroTitle) heroTitle.classList.add('typeable');
             if (cursor) setTimeout(function() {
-            cursor.style.animation = 'none';
-            cursor.style.opacity = '1';
-            cursor.style.transition = 'opacity 0.6s';
-            requestAnimationFrame(function() {
-              requestAnimationFrame(function() { cursor.style.opacity = '0'; });
-            });
-          }, 800);
+              cursor.style.animation   = 'none';
+              cursor.style.opacity     = '1';
+              cursor.style.transition  = 'opacity 0.6s';
+              requestAnimationFrame(function() {
+                requestAnimationFrame(function() { cursor.style.opacity = '0'; });
+              });
+            }, 800);
             return;
           }
           deleting = true;
@@ -1230,8 +1493,16 @@
         el.textContent = word.slice(0, --charIdx);
         if (charIdx === 0) {
           deleting = false;
-          idx++;
-          timer = setTimeout(tick, 300);
+          if (restarting) {
+            restarting   = false;
+            sneaking     = true;
+            charIdx      = 0;
+            currentOrder = orderings[restartCount % 3]; // apply new order only after old text is gone
+            timer = setTimeout(tick, 120);
+          } else {
+            idx++;
+            timer = setTimeout(tick, 300);
+          }
         } else {
           timer = setTimeout(tick, 36);
         }
@@ -1240,11 +1511,31 @@
 
     tick();
 
+    if (heroTitle) {
+      heroTitle.addEventListener('click', function() {
+        if (!done) return;
+        restartCount++;
+        // keep currentOrder unchanged until deletion is done — getFinal() must return the text on screen
+        done       = false;
+        restarting = true;
+        deleting   = true;
+        idx        = currentOrder.length; // idx past end → getFinal() (old order)
+        charIdx    = getFinal().length;   // correct length of the text currently displayed
+        heroTitle.classList.remove('typeable');
+        clearTimeout(timer);
+        showCursor();
+        timer = setTimeout(tick, 120);
+      });
+    }
+
     window.setTyperLang = function(l) {
-      lang = l; clearTimeout(timer);
+      lang = l;
+      clearTimeout(timer);
       idx = 0; charIdx = 0; deleting = false; done = false;
+      restarting = false; sneaking = false;
       el.textContent = '';
-      if (cursor) { cursor.style.transition = ''; cursor.style.opacity = ''; }
+      if (heroTitle) heroTitle.classList.remove('typeable');
+      showCursor();
       tick();
     };
   })();
