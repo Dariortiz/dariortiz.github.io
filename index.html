@@ -4,7 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Luis Darío Ortiz Izquierdo, Applied Mathematician, Blockchain Engineer and Full-Stack Developer based in Mexico City.">
+  <meta property="og:title" content="Luis Darío Ortiz Izquierdo">
+  <meta property="og:description" content="Applied Mathematician, Blockchain Engineer and Full-Stack Developer based in Mexico City.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dariortiz.github.io">
+  <meta property="og:image" content="https://dariortiz.github.io/headshot.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Luis Darío Ortiz Izquierdo">
+  <meta name="twitter:description" content="Applied Mathematician, Blockchain Engineer and Full-Stack Developer based in Mexico City.">
+  <meta name="twitter:image" content="https://dariortiz.github.io/headshot.jpg">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%237C3AED'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='serif' font-size='18' font-weight='bold' fill='white'%3ED%3C/text%3E%3C/svg%3E">
   <title>Luis Darío Ortiz Izquierdo</title>
+  <script>
+    (function(){
+      var t=localStorage.getItem('theme');
+      if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches))
+        document.documentElement.setAttribute('data-theme','dark');
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
@@ -12,6 +29,8 @@
     :root {
       --bg:           #FFFFFF;
       --bg-subtle:    #EEF2FF;
+      --bg-card:      #FFFFFF;
+      --text-body:    #374151;
       --purple:       #7C3AED;
       --purple-mid:   #6D28D9;
       --purple-dark:  #4C1D95;
@@ -23,6 +42,33 @@
       --border:       #C7D2FE;
       --border-light: #E0E7FF;
     }
+
+    /* ── DARK MODE ── */
+    [data-theme="dark"] {
+      --bg:           #0F0F1A;
+      --bg-subtle:    #1A1428;
+      --bg-card:      #16122A;
+      --text-body:    #CBD5E1;
+      --purple:       #8B5CF6;
+      --purple-mid:   #7C3AED;
+      --purple-dark:  #A78BFA;
+      --navy:         #93C5FD;
+      --rose:         #F472B6;
+      --rosa:         #F472B6;
+      --text:         #E2E8F0;
+      --text-muted:   #94A3B8;
+      --border:       #2D2060;
+      --border-light: #1E1645;
+    }
+    [data-theme="dark"] nav { background: rgba(15,15,26,0.92); }
+    [data-theme="dark"] .hero {
+      background: linear-gradient(160deg, #1A1428 0%, #1E1440 30%, #241855 60%, #1A1645 100%);
+      background-size: 300% 300%;
+    }
+    [data-theme="dark"] .hero h1 .first { color: #818CF8; }
+    [data-theme="dark"] .section-wrap.alt { background: var(--bg-subtle); }
+    [data-theme="dark"] .btn-secondary { background: var(--bg-card); color: var(--text); border-color: var(--border); }
+    [data-theme="dark"] .lang-toggle { background: var(--bg-card); border-color: var(--border); }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -66,6 +112,28 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--purple-mid); }
+    .nav-links a.active { color: var(--purple-mid); font-weight: 700; }
+    #scroll-progress {
+      position: absolute;
+      bottom: 0; left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--purple), var(--rosa));
+      width: 0%;
+      transition: width 0.1s linear;
+      border-radius: 0 2px 2px 0;
+    }
+    .theme-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      padding: 4px 7px;
+      border-radius: 8px;
+      line-height: 1;
+      transition: background 0.2s;
+      color: var(--text-muted);
+    }
+    .theme-btn:hover { background: var(--bg-subtle); }
     .lang-toggle {
       display: flex;
       background: var(--bg-subtle);
@@ -106,16 +174,48 @@
       gap: 2rem;
     }
     .hero-text { flex: 1; }
-    .hero-photo { flex-shrink: 0; }
+    .hero-photo {
+      flex-shrink: 0;
+      position: relative;
+      width: 264px;
+      height: 264px;
+      border-radius: 50%;
+      background: var(--purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #E91E8C, #7C3AED, #5F6CDA, #1E3A8A, #AB4155, #E91E8C);
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      animation: spinRing 3s linear infinite;
+      z-index: 0;
+    }
+    .hero-photo::after {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border-radius: 50%;
+      background: #fff;
+      z-index: 1;
+    }
+    .hero-photo:hover::before { opacity: 1; }
+    @keyframes spinRing { to { transform: rotate(360deg); } }
     .hero-avatar {
+      position: relative;
+      z-index: 2;
       width: 240px;
       height: 240px;
       border-radius: 50%;
       object-fit: cover;
       object-position: center 12%;
-      border: 4px solid rgba(255,255,255,0.95);
-      box-shadow: 0 0 0 3px var(--purple), 0 12px 32px rgba(76,29,149,0.22);
       display: block;
+      box-shadow: 0 10px 28px rgba(76,29,149,0.2);
     }
     .hero h1 {
       font-size: clamp(2.2rem, 5.5vw, 3.6rem);
@@ -154,7 +254,7 @@
     }
     .btn-primary { background: var(--purple-mid); color: #fff; }
     .btn-primary:hover { background: var(--purple-dark); transform: translateY(-1px); }
-    .btn-secondary { background: #fff; color: var(--purple-dark); border: 1.5px solid var(--border); }
+    .btn-secondary { background: var(--bg-card); color: var(--purple-dark); border: 1.5px solid var(--border); }
     .btn-secondary:hover { border-color: var(--purple); background: var(--bg-subtle); transform: translateY(-1px); }
 
     /* ── SECTION WRAPPER ── */
@@ -179,12 +279,12 @@
     }
 
     /* ── PROFILE ── */
-    .profile-text { font-size: 1.05rem; line-height: 1.8; color: #374151; }
+    .profile-text { font-size: 1.05rem; line-height: 1.8; color: var(--text-body); }
 
     /* ── PROJECTS GRID ── */
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 1.5rem; }
     .project-card {
-      background: #fff;
+      background: var(--bg-card);
       border: 1.5px solid var(--border);
       border-radius: 12px;
       padding: 1.75rem;
@@ -219,7 +319,7 @@
     }
     .proj-link:hover { background: var(--bg-subtle); border-color: var(--purple); }
     .project-card ul { padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; }
-    .project-card ul li { font-size: 0.875rem; color: #374151; line-height: 1.55; }
+    .project-card ul li { font-size: 0.875rem; color: var(--text-body); line-height: 1.55; }
     .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.25rem; }
     .proj-tag {
       font-size: 0.72rem;
@@ -237,8 +337,8 @@
       display: grid;
       grid-template-columns: 150px 1fr;
       gap: 0 2rem;
-      padding-bottom: 2.25rem;
-      margin-bottom: 2.25rem;
+      padding-bottom: 1.4rem;
+      margin-bottom: 1.4rem;
       border-bottom: 1px solid var(--border-light);
     }
     .timeline-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
@@ -264,11 +364,11 @@
     }
     .tl-sub:first-of-type { margin-top: 0; }
     .tl-bullets { padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 0.25rem; }
-    .tl-bullets li { font-size: 0.875rem; color: #374151; line-height: 1.55; }
+    .tl-bullets li { font-size: 0.875rem; color: var(--text-body); line-height: 1.55; }
 
     /* ── EDUCATION ── */
     .edu-card {
-      background: #fff;
+      background: var(--bg-card);
       border: 1.5px solid var(--border);
       border-left: 5px solid var(--rosa);
       border-radius: 10px;
@@ -287,7 +387,7 @@
       border-radius: 20px;
       margin-bottom: 0.85rem;
     }
-    .edu-thesis { font-size: 0.9rem; color: #374151; line-height: 1.65; }
+    .edu-thesis { font-size: 0.9rem; color: var(--text-body); line-height: 1.65; }
     .edu-thesis em { color: var(--purple-mid); font-style: italic; }
     .edu-thesis p + p { margin-top: 0.65rem; }
 
@@ -304,7 +404,7 @@
       border-bottom: 1.5px solid var(--border-light);
     }
     .tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
-    .tag { background: #fff; border: 1px solid var(--border); color: #374151; padding: 0.3rem 0.85rem; border-radius: 20px; font-size: 0.78rem; font-weight: 500; line-height: 1; }
+    .tag { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-body); padding: 0.3rem 0.85rem; border-radius: 20px; font-size: 0.78rem; font-weight: 500; line-height: 1; }
     .tag.hi { background: var(--bg-subtle); border-color: var(--purple); color: var(--purple-dark); font-weight: 600; }
 
     /* ── CERTIFICATIONS ── */
@@ -323,13 +423,13 @@
 
     /* ── ACHIEVEMENTS ── */
     .ach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
-    .ach-card { background: #fff; border: 1.5px solid var(--border); border-radius: 10px; padding: 1.1rem 1.25rem; }
+    .ach-card { background: var(--bg-card); border: 1.5px solid var(--border); border-radius: 10px; padding: 1.1rem 1.25rem; }
     .ach-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--rose); margin-bottom: 0.35rem; }
     .ach-value { font-size: 0.875rem; color: var(--text); line-height: 1.5; }
 
     /* ── HERO GRADIENT ANIMATION ── */
     .hero {
-      background: linear-gradient(160deg, #EEF2FF 0%, #EDE9FE 30%, #DDD6FE 60%, #E8E4FF 100%);
+      background: linear-gradient(160deg, #E8EDFF 0%, #DFD7FD 30%, #C4B5FC 60%, #D8D0FF 100%);
       background-size: 300% 300%;
       animation: gradientShift 10s ease infinite;
     }
@@ -354,6 +454,24 @@
       0%   { background-position: 150% center; }
       100% { background-position: -50% center; }
     }
+
+    /* ── LETTER ENTRANCE ── */
+    @keyframes letterIn {
+      from { opacity: 0; transform: translateY(26px); }
+      to   { opacity: 1; transform: none; }
+    }
+    .letter {
+      display: inline-block;
+      animation: letterIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    /* ── SKILL TAG POP-IN ── */
+    .tag-pop {
+      opacity: 0;
+      transform: scale(0.75) translateY(6px);
+      transition: opacity 0.32s ease, transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .tag-pop.popped { opacity: 1; transform: none; }
 
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
@@ -387,6 +505,19 @@
       box-shadow: 0 14px 36px rgba(76,29,149,0.16);
     }
 
+    /* ── TYPED CURSOR ── */
+    .typed-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 0.95em;
+      background: var(--navy);
+      margin-left: 3px;
+      vertical-align: middle;
+      border-radius: 1px;
+      animation: blink 0.8s step-end infinite;
+    }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
     /* ── FOOTER ── */
     footer { text-align: center; padding: 2.25rem 2rem; font-size: 0.8rem; color: var(--text-muted); border-top: 1px solid var(--border); }
     footer a { color: var(--purple-mid); text-decoration: none; }
@@ -402,9 +533,26 @@
       .hero { padding: 4rem 1.25rem 3.5rem; }
       .hero-inner { flex-direction: column; text-align: center; gap: 2rem; }
       .hero-links { justify-content: center; }
+      .hero-photo { width: 166px; height: 166px; }
       .hero-avatar { width: 150px; height: 150px; }
       .section-wrap { padding: 3.5rem 1.25rem; }
       .projects-grid { grid-template-columns: 1fr; }
+    }
+    /* ── PRINT ── */
+    @media print {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      nav, .hero-photo, .hero-links, footer, #scroll-progress, .theme-btn, .lang-toggle { display: none !important; }
+      .hero { padding: 1.5rem 0; background: none !important; border: none; }
+      .hero-inner { gap: 0; }
+      .hero h1 { font-size: 2rem; }
+      .dario-name { -webkit-text-fill-color: #AB4155; background: none; }
+      .typed-cursor { display: none; }
+      #typed-title::after { content: "Applied Mathematician · Blockchain Engineer · Full-Stack Developer"; }
+      .section-wrap { padding: 1.2rem 0; }
+      .section-wrap.alt { background: none; border: none; }
+      .project-card, .edu-card { border: 1px solid #ccc; break-inside: avoid; }
+      .reveal, .tag-pop { opacity: 1 !important; transform: none !important; }
+      body { font-size: 10.5pt; color: #000; }
     }
   </style>
 </head>
@@ -412,17 +560,23 @@
 
 <!-- ══ NAV ══ -->
 <nav>
+  <div id="scroll-progress"></div>
   <span class="nav-name">Luis Darío Ortiz Izquierdo</span>
   <div class="nav-right">
     <div class="nav-links">
-      <a href="#profile"    data-en="About"      data-es="Sobre mí">About</a>
-      <a href="#projects"   data-en="Projects"   data-es="Proyectos">Projects</a>
-      <a href="#experience" data-en="Experience" data-es="Experiencia">Experience</a>
-      <a href="#academic"   data-en="Academic"   data-es="Académico">Academic</a>
-      <a href="#education"  data-en="Education"  data-es="Educación">Education</a>
-      <a href="#skills"     data-en="Skills"     data-es="Habilidades">Skills</a>
-      <a href="#achievements" data-en="More"     data-es="Más">More</a>
+      <a href="#profile"      data-en="About"      data-es="Sobre mí">About</a>
+      <a href="#projects"     data-en="Projects"   data-es="Proyectos">Projects</a>
+      <a href="#experience"   data-en="Experience" data-es="Experiencia">Experience</a>
+      <a href="#academic"     data-en="Academic"   data-es="Académico">Academic</a>
+      <a href="#education"    data-en="Education"  data-es="Educación">Education</a>
+      <a href="#skills"       data-en="Skills"     data-es="Habilidades">Skills</a>
+      <a href="#achievements" data-en="More"       data-es="Más">More</a>
     </div>
+    <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">
+      <svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
       <button class="lang-btn"        data-lang="es" onclick="setLang('es')">ES</button>
@@ -438,15 +592,13 @@
         <span class="first">Luis <span class="dario-name" style="font-size: 1.9em; font-family: 'Allura', cursive;">Darío</span></span><br>
         <span class="last" style="display: block; margin-top: -0.45em;">Ortiz Izquierdo</span>
       </h1>
-      <p class="hero-title"
-         data-en="Applied Mathematician · Blockchain Engineer · Full-Stack Developer"
-         data-es="Matemático Aplicado · Ingeniero Blockchain · Desarrollador Full-Stack">
-        Applied Mathematician · Blockchain Engineer · Full-Stack Developer
+      <p class="hero-title">
+        <span id="typed-title"></span><span class="typed-cursor"></span>
       </p>
       <p class="hero-location">
-        Mexico City &nbsp;·&nbsp;
+        <span data-en="Mexico City" data-es="Ciudad de México">Mexico City</span> &nbsp;·&nbsp;
         <a href="mailto:dariortiz@protonmail.com">dariortiz@protonmail.com</a>
-        &nbsp;·&nbsp; +52 55 1954 4511
+        &nbsp;·&nbsp; <a href="tel:+525519544511">+52 55 1954 4511</a>
       </p>
       <div class="hero-links">
         <a href="https://github.com/dariortiz" target="_blank" rel="noopener" class="btn btn-primary">GitHub</a>
@@ -578,7 +730,7 @@
     <div class="timeline">
 
       <div class="timeline-item">
-        <div class="timeline-date">Sep 2025 – Present</div>
+        <div class="timeline-date" data-en="Sep 2025 – Present" data-es="Sep 2025 – Presente">Sep 2025 – Present</div>
         <div>
           <div class="tl-title" data-en="AI Engineer / Backend Developer, Associate" data-es="Ingeniero de IA / Desarrollador Backend, Associate">AI Engineer / Backend Developer, Associate</div>
           <div class="tl-org">PwC · CT&amp;I, Future Ready Program</div>
@@ -638,7 +790,7 @@
         <div>
           <div class="tl-title" data-en="Social Service: Cryptography in Hardware &amp; Software" data-es="Servicio Social: Criptografía en Hardware y Software">Social Service: Cryptography in Hardware &amp; Software</div>
           <div class="tl-org" data-en="Institute of Applied Sciences and Technology (ICAT), UNAM" data-es="Instituto de Ciencias Aplicadas y Tecnología (ICAT), UNAM">Institute of Applied Sciences and Technology (ICAT), UNAM</div>
-          <div class="tl-loc">Mexico City</div>
+          <div class="tl-loc" data-en="Mexico City" data-es="Ciudad de México">Mexico City</div>
           <ul class="tl-bullets">
             <li data-en="Implementation of modern cryptographic algorithms across software platforms and FPGA development systems" data-es="Implementación de algoritmos criptográficos modernos en plataformas de software y sistemas FPGA">Implementation of modern cryptographic algorithms across software platforms and FPGA development systems</li>
             <li data-en="Integration of algorithms according to international standards in hardware security modules" data-es="Integración de algoritmos según estándares internacionales en módulos de seguridad hardware">Integration of algorithms according to international standards in hardware security modules</li>
@@ -651,8 +803,8 @@
         <div class="timeline-date">2024</div>
         <div>
           <div class="tl-title" data-en="Research Volunteer" data-es="Investigador Voluntario">Research Volunteer</div>
-          <div class="tl-org" data-en="Biomedical Research Institute (IIBm), UNAM" data-es="Instituto de Investigaciones Biomédicas (IIBm), UNAM">Biomedical Research Institute (IIBm), UNAM</div>
-          <div class="tl-loc">Mexico City</div>
+          <div class="tl-org" data-en="Biomedical Research Institute, UNAM" data-es="Instituto de Investigaciones Biomédicas, UNAM">Biomedical Research Institute, UNAM</div>
+          <div class="tl-loc" data-en="Mexico City" data-es="Ciudad de México">Mexico City</div>
           <ul class="tl-bullets">
             <li data-en="Mathematical modeling for personalized tuberculosis treatments using stochastic differential equations" data-es="Modelado matemático para tratamientos personalizados de tuberculosis usando ecuaciones diferenciales estocásticas">Mathematical modeling for personalized tuberculosis treatments using stochastic differential equations</li>
             <li data-en="Co-authorship of chapters in a mathematical biology book" data-es="Coautoría de capítulos en libro de biología matemática">Co-authorship of chapters in a mathematical biology book</li>
@@ -665,7 +817,7 @@
         <div>
           <div class="tl-title" data-en="Volunteer: Evolutionary Algorithms" data-es="Voluntariado: Algoritmos Evolutivos">Volunteer: Evolutionary Algorithms</div>
           <div class="tl-org">IIMAS, UNAM</div>
-          <div class="tl-loc">Mexico City</div>
+          <div class="tl-loc" data-en="Mexico City" data-es="Ciudad de México">Mexico City</div>
           <ul class="tl-bullets">
             <li data-en="Research in bio-inspired algorithms and practical optimization applications" data-es="Investigación en algoritmos bioinspirados y aplicaciones de optimización práctica">Research in bio-inspired algorithms and practical optimization applications</li>
             <li data-en="Implementation of evolution-based optimization models" data-es="Implementación de modelos de optimización basados en evolución">Implementation of evolution-based optimization models</li>
@@ -678,7 +830,7 @@
         <div>
           <div class="tl-title" data-en="Academic Advisor" data-es="Consejero Académico">Academic Advisor</div>
           <div class="tl-org" data-en="Academic Council of Physical-Mathematical Sciences, UNAM" data-es="Consejo Académico del Área de Ciencias Físico Matemáticas, UNAM">Academic Council of Physical-Mathematical Sciences, UNAM</div>
-          <div class="tl-loc">Mexico City</div>
+          <div class="tl-loc" data-en="Mexico City" data-es="Ciudad de México">Mexico City</div>
           <ul class="tl-bullets">
             <li data-en="Student representation of the Faculty of Sciences before university governing bodies" data-es="Representación estudiantil de la Facultad de Ciencias ante órganos de gobierno universitario">Student representation of the Faculty of Sciences before university governing bodies</li>
             <li data-en="Coordination of academic initiatives for students university-wide" data-es="Coordinación de iniciativas académicas estudiantiles a nivel universitario">Coordination of academic initiatives for students university-wide</li>
@@ -738,15 +890,15 @@
           <span class="tag hi">viem</span>
           <span class="tag hi">ethers.js</span>
           <span class="tag hi">OpenZeppelin</span>
-          <span class="tag">Smart Contract Security &amp; Auditing</span>
-          <span class="tag">DApp Architecture</span>
+          <span class="tag" data-en="Smart Contract Security &amp; Auditing" data-es="Seguridad y Auditoría de Smart Contracts">Smart Contract Security &amp; Auditing</span>
+          <span class="tag" data-en="DApp Architecture" data-es="Arquitectura de DApps">DApp Architecture</span>
           <span class="tag">ERC-20 / ERC-721</span>
           <span class="tag">DeFi (MakerDAO, Compound, Aave, Uniswap)</span>
-          <span class="tag">Consensus Mechanisms (PoW / PoS)</span>
-          <span class="tag">Tokenization &amp; Digital Assets</span>
-          <span class="tag">On-chain Governance</span>
-          <span class="tag">Gas Optimization</span>
-          <span class="tag">Fuzz / Invariant Testing</span>
+          <span class="tag" data-en="Consensus Mechanisms (PoW / PoS)" data-es="Mecanismos de Consenso (PoW / PoS)">Consensus Mechanisms (PoW / PoS)</span>
+          <span class="tag" data-en="Tokenization &amp; Digital Assets" data-es="Tokenización y Activos Digitales">Tokenization &amp; Digital Assets</span>
+          <span class="tag" data-en="On-chain Governance" data-es="Gobernanza On-chain">On-chain Governance</span>
+          <span class="tag" data-en="Gas Optimization" data-es="Optimización de Gas">Gas Optimization</span>
+          <span class="tag" data-en="Fuzz / Invariant Testing" data-es="Pruebas Fuzz / Invariant">Fuzz / Invariant Testing</span>
         </div>
       </div>
 
@@ -754,15 +906,15 @@
         <h3 data-en="Mathematics" data-es="Matemáticas">Mathematics</h3>
         <div class="tags">
           <span class="tag hi">Phase Type Distributions</span>
-          <span class="tag hi">Stochastic Processes &amp; Markov Chains</span>
-          <span class="tag hi">Probability Theory &amp; Statistical Inference</span>
-          <span class="tag">Mathematical Modeling</span>
-          <span class="tag">Game Theory &amp; Mechanism Design</span>
-          <span class="tag">Graph Theory &amp; Network Analysis</span>
-          <span class="tag">Population Dynamics &amp; Evolutionary Models</span>
-          <span class="tag">Coding Theory</span>
-          <span class="tag">Optimization</span>
-          <span class="tag">Formal Verification</span>
+          <span class="tag hi" data-en="Stochastic Processes &amp; Markov Chains" data-es="Procesos Estocásticos y Cadenas de Markov">Stochastic Processes &amp; Markov Chains</span>
+          <span class="tag hi" data-en="Probability Theory &amp; Statistical Inference" data-es="Teoría de Probabilidad e Inferencia Estadística">Probability Theory &amp; Statistical Inference</span>
+          <span class="tag" data-en="Mathematical Modeling" data-es="Modelado Matemático">Mathematical Modeling</span>
+          <span class="tag" data-en="Game Theory &amp; Mechanism Design" data-es="Teoría de Juegos y Diseño de Mecanismos">Game Theory &amp; Mechanism Design</span>
+          <span class="tag" data-en="Graph Theory &amp; Network Analysis" data-es="Teoría de Grafos y Análisis de Redes">Graph Theory &amp; Network Analysis</span>
+          <span class="tag" data-en="Population Dynamics &amp; Evolutionary Models" data-es="Dinámica Poblacional y Modelos Evolutivos">Population Dynamics &amp; Evolutionary Models</span>
+          <span class="tag" data-en="Coding Theory" data-es="Teoría de Códigos">Coding Theory</span>
+          <span class="tag" data-en="Optimization" data-es="Optimización">Optimization</span>
+          <span class="tag" data-en="Formal Verification" data-es="Verificación Formal">Formal Verification</span>
         </div>
       </div>
 
@@ -770,27 +922,27 @@
         <h3 data-en="Cryptography" data-es="Criptografía">Cryptography</h3>
         <div class="tags">
           <span class="tag hi">ECC</span>
-          <span class="tag hi">Zero-Knowledge Proofs (ZKPs)</span>
+          <span class="tag hi" data-en="Zero-Knowledge Proofs (ZKPs)" data-es="Pruebas de Conocimiento Cero (ZKPs)">Zero-Knowledge Proofs (ZKPs)</span>
           <span class="tag">SHA-256 / Keccak</span>
-          <span class="tag">Merkle Trees &amp; Proofs</span>
+          <span class="tag" data-en="Merkle Trees &amp; Proofs" data-es="Árboles y Pruebas de Merkle">Merkle Trees &amp; Proofs</span>
           <span class="tag">ECDSA / EdDSA / Schnorr</span>
           <span class="tag">AES-256-GCM</span>
           <span class="tag">X25519 / ECDH / HKDF</span>
-          <span class="tag">Multi-Party Computation (MPC)</span>
-          <span class="tag">Post-Quantum (Kyber, Dilithium, NTRU)</span>
-          <span class="tag">Hardware Security Modules</span>
+          <span class="tag" data-en="Multi-Party Computation (MPC)" data-es="Cómputo Multipartito (MPC)">Multi-Party Computation (MPC)</span>
+          <span class="tag" data-en="Post-Quantum (Kyber, Dilithium, NTRU)" data-es="Post-Cuántica (Kyber, Dilithium, NTRU)">Post-Quantum (Kyber, Dilithium, NTRU)</span>
+          <span class="tag" data-en="Hardware Security Modules" data-es="Módulos de Seguridad de Hardware">Hardware Security Modules</span>
         </div>
       </div>
 
       <div class="skill-group">
         <h3 data-en="AI &amp; LLMs" data-es="IA y LLMs">AI &amp; LLMs</h3>
         <div class="tags">
-          <span class="tag">LLM Integration</span>
+          <span class="tag" data-en="LLM Integration" data-es="Integración de LLMs">LLM Integration</span>
           <span class="tag">Prompt Engineering</span>
           <span class="tag">LangChain</span>
           <span class="tag">LlamaIndex</span>
           <span class="tag">RAG</span>
-          <span class="tag">Vector Search &amp; Embeddings</span>
+          <span class="tag" data-en="Vector Search &amp; Embeddings" data-es="Búsqueda Vectorial y Embeddings">Vector Search &amp; Embeddings</span>
           <span class="tag">Streaming / Async LLM</span>
           <span class="tag">Claude Code · Cursor · Gemini</span>
         </div>
@@ -935,6 +1087,46 @@
     all.forEach(function(el) { observer.observe(el); });
   })();
 
+  // Hero parallax
+  (function() {
+    var heroInner = document.querySelector('.hero-inner');
+    if (!heroInner) return;
+    window.addEventListener('scroll', function() {
+      var s = window.pageYOffset;
+      if (s < window.innerHeight) {
+        heroInner.style.transform = 'translateY(' + s * 0.18 + 'px)';
+      }
+    }, { passive: true });
+  })();
+
+  // Staggered letter entrance — "Ortiz Izquierdo"
+  (function() {
+    var last = document.querySelector('.hero h1 .last');
+    if (!last) return;
+    var chars = Array.from(last.textContent);
+    last.innerHTML = chars.map(function(c, i) {
+      var delay = (0.48 + i * 0.042) + 's';
+      return '<span class="letter" style="animation-delay:' + delay + '">' + (c === ' ' ? '&nbsp;' : c) + '</span>';
+    }).join('');
+  })();
+
+  // Skill tag pop-in
+  (function() {
+    var section = document.querySelector('#skills');
+    if (!section) return;
+    var tags = section.querySelectorAll('.tag');
+    tags.forEach(function(t) { t.classList.add('tag-pop'); });
+    var obs = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        tags.forEach(function(t, i) {
+          setTimeout(function() { t.classList.add('popped'); }, i * 35);
+        });
+        obs.disconnect();
+      }
+    }, { threshold: 0.1 });
+    obs.observe(section);
+  })();
+
   // Magnetic buttons
   document.querySelectorAll('.hero-links .btn').forEach(function(btn) {
     btn.addEventListener('mousemove', function(e) {
@@ -948,6 +1140,117 @@
     });
   });
 
+  // Scroll progress bar
+  (function() {
+    var bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+    window.addEventListener('scroll', function() {
+      var doc = document.documentElement;
+      var total = doc.scrollHeight - doc.clientHeight;
+      bar.style.width = (total > 0 ? (window.pageYOffset / total) * 100 : 0) + '%';
+    }, { passive: true });
+  })();
+
+  // Active nav link on scroll
+  (function() {
+    var sections = document.querySelectorAll('div[id], section[id]');
+    var navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var id = entry.target.getAttribute('id');
+          navLinks.forEach(function(a) {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { threshold: 0.25, rootMargin: '-60px 0px -55% 0px' });
+    sections.forEach(function(s) { obs.observe(s); });
+  })();
+
+  // Dark mode toggle
+  (function() {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    var icon = document.getElementById('theme-icon');
+    var moonPath = 'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z';
+    var sunPath  = 'M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z';
+    function applyTheme(dark) {
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      if (icon) icon.querySelector('path') ? icon.querySelector('path').setAttribute('d', dark ? sunPath : moonPath) : null;
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+    }
+    var saved = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(saved === 'dark' || (!saved && prefersDark));
+    btn.addEventListener('click', function() {
+      applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+    });
+  })();
+
+  // Typewriter animation — cycles through titles then locks to combined final line
+  (function() {
+    var titles = {
+      en: ['Applied Mathematician', 'Blockchain Engineer', 'Full-Stack Developer'],
+      es: ['Matemático Aplicado', 'Ingeniero Blockchain', 'Desarrollador Full-Stack']
+    };
+    var finals = {
+      en: 'Applied Mathematician · Blockchain Engineer · Full-Stack Developer',
+      es: 'Matemático Aplicado · Ingeniero Blockchain · Desarrollador Full-Stack'
+    };
+    var el = document.getElementById('typed-title');
+    var cursor = document.querySelector('.typed-cursor');
+    if (!el) return;
+    var lang = 'en', idx = 0, charIdx = 0, deleting = false, done = false, timer;
+
+    function tick() {
+      if (done) return;
+      var isFinal = idx >= titles[lang].length;
+      var word = isFinal ? finals[lang] : titles[lang][idx];
+
+      if (!deleting) {
+        el.textContent = word.slice(0, ++charIdx);
+        if (charIdx === word.length) {
+          if (isFinal) {
+            done = true;
+            if (cursor) setTimeout(function() {
+            cursor.style.animation = 'none';
+            cursor.style.opacity = '1';
+            cursor.style.transition = 'opacity 0.6s';
+            requestAnimationFrame(function() {
+              requestAnimationFrame(function() { cursor.style.opacity = '0'; });
+            });
+          }, 800);
+            return;
+          }
+          deleting = true;
+          timer = setTimeout(tick, 1100);
+        } else {
+          timer = setTimeout(tick, 68);
+        }
+      } else {
+        el.textContent = word.slice(0, --charIdx);
+        if (charIdx === 0) {
+          deleting = false;
+          idx++;
+          timer = setTimeout(tick, 300);
+        } else {
+          timer = setTimeout(tick, 36);
+        }
+      }
+    }
+
+    tick();
+
+    window.setTyperLang = function(l) {
+      lang = l; clearTimeout(timer);
+      idx = 0; charIdx = 0; deleting = false; done = false;
+      el.textContent = '';
+      if (cursor) { cursor.style.transition = ''; cursor.style.opacity = ''; }
+      tick();
+    };
+  })();
+
   function setLang(lang) {
     document.querySelectorAll('[data-en]').forEach(function(el) {
       var val = el.getAttribute('data-' + lang);
@@ -957,6 +1260,7 @@
       btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
     });
     document.documentElement.lang = lang;
+    if (window.setTyperLang) window.setTyperLang(lang);
   }
 </script>
 
