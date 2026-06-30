@@ -24,7 +24,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Allura&family=DM+Serif+Display&family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg:           #FFFFFF;
@@ -73,7 +73,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       color: var(--text);
       background: var(--bg);
       line-height: 1.6;
@@ -287,6 +287,16 @@
       margin-bottom: 2.25rem;
       line-height: 1.2;
     }
+
+    /* ── TYPOGRAPHY ── */
+    h1, h2 { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; }
+    .proj-tag, .tag, .timeline-date, .edu-gpa {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+    }
+    .proj-tag  { font-size: 0.66rem; }
+    .tag       { font-size: 0.72rem; }
+    .timeline-date { font-size: 0.72rem; font-weight: 600; letter-spacing: 0; }
+    .edu-gpa   { font-size: 0.74rem; }
 
     /* ── PROFILE ── */
     .profile-text { font-size: 1.05rem; line-height: 1.8; color: var(--text-body); }
@@ -564,8 +574,10 @@
     @media (max-width: 700px) {
       nav { padding: 0 1rem; }
       .nav-links { display: none; }
+      #nav-hamburger { display: flex; }
       .timeline-item { grid-template-columns: 1fr; gap: 0.25rem; }
       .timeline-item::before { display: none; }
+      .tl-item-line { display: none; }
       .timeline-date { text-align: left; }
       h2 { font-size: 1.5rem; }
       .hero { padding: 4rem 1.25rem 3.5rem; }
@@ -660,6 +672,85 @@
       100% { box-shadow: 0 0 0 0 rgba(124,58,237,0); }
     }
 
+    /* ── TIMELINE ITEM LINE ── */
+    .tl-item-line {
+      position: absolute;
+      left: calc(150px + 1rem - 1px);
+      top: calc(0.4rem + 14px);
+      width: 2px;
+      background: linear-gradient(to bottom, var(--purple), var(--rosa));
+      transform: scaleY(0);
+      transform-origin: top;
+      border-radius: 1px;
+      pointer-events: none;
+      z-index: 0;
+      transition: transform 0.5s cubic-bezier(0.22,1,0.36,1) 0.25s;
+    }
+    .timeline-item.visible .tl-item-line { transform: scaleY(1); }
+
+    /* ── MOBILE NAV ── */
+    #nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    #nav-hamburger:hover { background: var(--bg-subtle); }
+    #nav-hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--text-muted);
+      border-radius: 1px;
+      transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), opacity 0.2s;
+    }
+    #nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    #nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    #nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    #nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 150;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    #nav-overlay.open { opacity: 1; pointer-events: auto; }
+    #nav-drawer {
+      position: fixed;
+      top: 0; right: 0;
+      width: min(75vw, 280px);
+      height: 100vh;
+      background: var(--bg-card);
+      border-left: 1px solid var(--border);
+      z-index: 151;
+      padding: 5rem 1.75rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transform: translateX(100%);
+      transition: transform 0.32s cubic-bezier(0.22,1,0.36,1);
+      box-shadow: -8px 0 40px rgba(0,0,0,0.18);
+    }
+    #nav-drawer.open { transform: translateX(0); }
+    #nav-drawer a {
+      display: block;
+      padding: 0.8rem 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border-light);
+      transition: color 0.18s, padding-left 0.18s;
+    }
+    #nav-drawer a:last-child { border-bottom: none; }
+    #nav-drawer a:hover { color: var(--purple-mid); padding-left: 0.5rem; }
+
     /* ── PRINT ── */
     @media print {
       *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -694,6 +785,9 @@
       <a href="#skills"       data-en="Skills"     data-es="Habilidades">Skills</a>
       <a href="#achievements" data-en="More"       data-es="Más">More</a>
     </div>
+    <button id="nav-hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
     <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">
       <svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
@@ -1196,6 +1290,18 @@
   </p>
 </footer>
 
+<!-- ══ MOBILE NAV DRAWER ══ -->
+<div id="nav-overlay"></div>
+<nav id="nav-drawer" aria-label="Mobile navigation">
+  <a href="#profile"      data-en="About"      data-es="Sobre mí">About</a>
+  <a href="#projects"     data-en="Projects"   data-es="Proyectos">Projects</a>
+  <a href="#experience"   data-en="Experience" data-es="Experiencia">Experience</a>
+  <a href="#academic"     data-en="Academic"   data-es="Académico">Academic</a>
+  <a href="#education"    data-en="Education"  data-es="Educación">Education</a>
+  <a href="#skills"       data-en="Skills"     data-es="Habilidades">Skills</a>
+  <a href="#achievements" data-en="More"       data-es="Más">More</a>
+</nav>
+
 <script>
   // Scroll-triggered reveal with stagger
   (function() {
@@ -1578,6 +1684,53 @@
     document.documentElement.lang = lang;
     if (window.setTyperLang) window.setTyperLang(lang);
   }
+
+  // Short connector line per timeline item — draws to 45% of that item's height
+  (function() {
+    var items = document.querySelectorAll('.timeline-item');
+    items.forEach(function(item) {
+      var line = document.createElement('div');
+      line.className = 'tl-item-line';
+      item.appendChild(line);
+    });
+    function setHeights() {
+      var topPx = 20; // matches calc(0.4rem + 14px) at 16px base
+      items.forEach(function(item) {
+        var line = item.querySelector('.tl-item-line');
+        if (line) line.style.height = Math.max(0, item.offsetHeight * 0.45 - topPx) + 'px';
+      });
+    }
+    requestAnimationFrame(setHeights);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(setHeights);
+  })();
+
+  // Mobile nav drawer
+  (function() {
+    var hamburger = document.getElementById('nav-hamburger');
+    var overlay   = document.getElementById('nav-overlay');
+    var drawer    = document.getElementById('nav-drawer');
+    if (!hamburger || !overlay || !drawer) return;
+    function open() {
+      hamburger.classList.add('open');
+      overlay.classList.add('open');
+      drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      hamburger.classList.remove('open');
+      overlay.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    hamburger.addEventListener('click', function() {
+      drawer.classList.contains('open') ? close() : open();
+    });
+    overlay.addEventListener('click', close);
+    drawer.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', close);
+    });
+  })();
+
 </script>
 
 </body>
